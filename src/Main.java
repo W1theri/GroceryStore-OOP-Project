@@ -1,136 +1,241 @@
-void main() {
-    System.out.println("=== Grocery Store Management System ===");
-    System.out.println();
+import java.util.ArrayList;
+import java.util.Scanner;
 
-    // CREATE OBJECTS
-    // Create Product objects
-    Product product1 = new Product(101, "Milk", 650.0, 50);
-    Product product2 = new Product(102, "Bread", 200.0, 100);
-    Product product3 = new Product(103, "Eggs", 800.0, 30);
-    Product product4 = new Product(); // Default constructor
+public class Main {
+    private static ArrayList<Product> products = new ArrayList<>();
+    private static ArrayList<Customer> customers = new ArrayList<>();
+    private static ArrayList<Sale> sales = new ArrayList<>();
 
-    // Create Customer objects
-    Customer customer1 = new Customer(1001, "Aidar Nurbek", "Standard", 15000.0);
-    Customer customer2 = new Customer(1002, "Aliya Kairat", "Gold", 65000.0);
-    Customer customer3 = new Customer(); // Default constructor
+    private static Scanner scanner = new Scanner(System.in);
 
-    // Create Sale objects
-    Sale sale1 = new Sale(5001, "Aidar Nurbek", 3500.0, "2025-01-15");
-    Sale sale2 = new Sale(5002, "Aliya Kairat", 0.0, "2025-01-15");
+    public static void main(String[] args) {
+        products.add(new Product(101, "Milk", 650.0, 50));
+        products.add(new Product(102, "Bread", 200.0, 100));
+        products.add(new Product(103, "Eggs", 800.0, 30));
 
-    // DISPLAY INITIAL STATE
-    System.out.println("--- PRODUCTS ---");
-    System.out.println(product1);
-    System.out.println(product2);
-    System.out.println(product3);
-    System.out.println(product4);
-    System.out.println();
+        customers.add(new Customer(1001, "Aidar Nurbek", "Standard", 15000.0));
+        customers.add(new Customer(1002, "Aliya Kairat", "Gold", 65000.0));
+        customers.add(new Customer(1003, "Arman Bekzat", "Silver", 25000.0));
 
-    System.out.println("--- CUSTOMERS ---");
-    System.out.println(customer1);
-    System.out.println(customer2);
-    System.out.println(customer3);
-    System.out.println();
+        sales.add(new Sale(5001, "Aidar Nurbek", 3500.0, "2025-01-15"));
+        sales.add(new Sale(5002, "Aliya Kairat", 12000.0, "2025-01-15"));
 
-    System.out.println("--- SALES ---");
-    System.out.println(sale1);
-    System.out.println(sale2);
-    System.out.println();
+        // Menu loop
+        boolean running = true;
 
-    System.out.println("--- TESTING GETTERS ---");
-    System.out.println("Product 1 name: " + product1.getName());
-    System.out.println("Product 1 price: " + product1.getPrice() + " KZT");
-    System.out.println("Product 1 stock: " + product1.getStockQuantity() + " units");
-    System.out.println("Customer 1 name: " + customer1.getName());
-    System.out.println("Customer 1 membership: " + customer1.getMembershipLevel());
-    System.out.println("Sale 1 total: " + sale1.getTotalAmount() + " KZT");
-    System.out.println();
+        System.out.println("\n🎉 Welcome to Grocery Store Management System! 🎉");
 
-    System.out.println("--- TESTING SETTERS ---");
-    System.out.println("Updating product4 information...");
-    product4.setProductId(104);
-    product4.setName("Cheese");
-    product4.setPrice(1500.0);
-    product4.setStockQuantity(25);
-    System.out.println("Updated: " + product4);
-    System.out.println();
+        while (running) {
+            displayMenu();
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
 
-    System.out.println("Updating customer3 information...");
-    customer3.setCustomerId(1003);
-    customer3.setName("Arman Bekzat");
-    customer3.setMembershipLevel("Silver");
-    customer3.setTotalPurchases(25000.0);
-    System.out.println("Updated: " + customer3);
-    System.out.println();
+            switch (choice) {
+                case 1:
+                    addProduct();
+                    break;
+                case 2:
+                    viewAllProducts();
+                    break;
+                case 3:
+                    addCustomer();
+                    break;
+                case 4:
+                    viewAllCustomers();
+                    break;
+                case 5:
+                    addSale();
+                    break;
+                case 6:
+                    viewAllSales();
+                    break;
+                case 0:
+                    System.out.println("\n👋 Thank you for using Grocery Store System! Goodbye!");
+                    running = false;
+                    break;
+                default:
+                    System.out.println("\n❌ Invalid choice! Please enter a number from the menu.");
+            }
 
-    System.out.println("--- TESTING PRODUCT METHODS ---");
-    System.out.println(product1.getName() + " in stock: " + product1.isInStock());
+            if (running) {
+                System.out.println("\nPress Enter to continue...");
+                scanner.nextLine();
+            }
+        }
 
-    System.out.println("\nSelling 5 units of " + product1.getName());
-    boolean sold = product1.sell(5);
-    System.out.println("Sale successful: " + sold);
-    System.out.println("New stock: " + product1.getStockQuantity() + " units");
+        scanner.close();
+    }
 
-    System.out.println("\nRestocking " + product2.getName() + " by 50 units");
-    product2.restock(50);
-    System.out.println("New stock: " + product2.getStockQuantity() + " units");
+    private static void displayMenu() {
+        System.out.println("\n========================================");
+        System.out.println("    🛒 GROCERY STORE SYSTEM 🛒");
+        System.out.println("========================================");
+        System.out.println("1. Add Product");
+        System.out.println("2. View All Products");
+        System.out.println("3. Add Customer");
+        System.out.println("4. View All Customers");
+        System.out.println("5. Add Sale");
+        System.out.println("6. View All Sales");
+        System.out.println("0. Exit");
+        System.out.println("========================================");
+        System.out.print("Enter your choice: ");
+    }
 
-    System.out.println("\nApplying 15% discount to " + product3.getName());
-    System.out.println("Old price: " + product3.getPrice() + " KZT");
-    product3.applyDiscount(15);
-    System.out.println("New price: " + product3.getPrice() + " KZT");
-    System.out.println();
+    private static void addProduct() {
+        System.out.println("\n--- ADD PRODUCT ---");
 
-    System.out.println("--- TESTING CUSTOMER METHODS ---");
-    System.out.println(customer1.getName() + " is VIP: " + customer1.isVIP());
-    System.out.println(customer2.getName() + " is VIP: " + customer2.isVIP());
+        System.out.print("Enter product ID: ");
+        int id = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
 
-    System.out.println("\n" + customer1.getName() + " discount: " + customer1.getDiscountPercentage() + "%");
-    System.out.println(customer2.getName() + " discount: " + customer2.getDiscountPercentage() + "%");
+        System.out.print("Enter product name: ");
+        String name = scanner.nextLine();
 
-    System.out.println("\nAdding 40000 KZT purchase to " + customer1.getName());
-    customer1.addPurchase(40000.0);
-    System.out.println("Updated: " + customer1);
-    System.out.println(customer1.getName() + " is now VIP: " + customer1.isVIP());
-    System.out.println(customer1.getName() + " new discount: " + customer1.getDiscountPercentage() + "%");
-    System.out.println();
+        System.out.print("Enter price (KZT): ");
+        double price = scanner.nextDouble();
+        scanner.nextLine(); // Consume newline
 
-    System.out.println("--- TESTING SALE METHODS ---");
-    System.out.println("Sale " + sale2.getSaleId() + " initial total: " + sale2.getTotalAmount() + " KZT");
+        System.out.print("Enter stock quantity: ");
+        int stock = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
 
-    System.out.println("\nAdding items to sale " + sale2.getSaleId());
-    sale2.addItem(650.0);  // Milk
-    sale2.addItem(200.0);  // Bread
-    sale2.addItem(680.0);  // Eggs (after discount)
-    System.out.println("New total: " + sale2.getTotalAmount() + " KZT");
+        Product product = new Product(id, name, price, stock);
+        products.add(product);
 
-    System.out.println("\nApplying 10% customer discount to sale " + sale2.getSaleId());
-    sale2.applyDiscount(10);
-    System.out.println("Total after discount: " + sale2.getTotalAmount() + " KZT");
+        System.out.println("\n✅ Product added successfully!");
+        System.out.println(product);
+    }
 
-    System.out.println("\nCalculating tax for sale " + sale2.getSaleId());
-    System.out.println("Tax amount (12%): " + sale2.calculateTax() + " KZT");
-    System.out.println("Total with tax: " + sale2.getTotalWithTax() + " KZT");
+    private static void viewAllProducts() {
+        System.out.println("\n========================================");
+        System.out.println("          ALL PRODUCTS");
+        System.out.println("========================================");
 
-    System.out.println("\nSale " + sale1.getSaleId() + " is large sale: " + sale1.isLargeSale());
-    System.out.println("Sale " + sale2.getSaleId() + " is large sale: " + sale2.isLargeSale());
-    System.out.println();
+        if (products.isEmpty()) {
+            System.out.println("❌ No products found.");
+            return;
+        }
 
-    System.out.println("--- FINAL STATE ---");
-    System.out.println("\nProducts:");
-    System.out.println(product1);
-    System.out.println(product2);
-    System.out.println(product3);
-    System.out.println(product4);
+        System.out.println("Total products: " + products.size());
+        System.out.println();
 
-    System.out.println("\nCustomers:");
-    System.out.println(customer1);
-    System.out.println(customer2);
-    System.out.println(customer3);
+        for (int i = 0; i < products.size(); i++) {
+            Product product = products.get(i);
+            System.out.println((i + 1) + ". " + product.getName() +
+                    " - " + product.getFormattedPrice());
+            System.out.println("   ID: " + product.getProductId());
+            System.out.println("   Stock: " + product.getStockQuantity() + " units");
+            System.out.println("   In Stock: " + (product.isInStock() ? "✅ Yes" : "❌ No"));
 
-    System.out.println("\nSales:");
-    System.out.println(sale1);
-    System.out.println(sale2);
+            if (product.isExpensive()) {
+                System.out.println("   💎 Premium Product");
+            }
+            System.out.println();
+        }
+    }
 
-    System.out.println("\nProgram Complete ");
+    private static void addCustomer() {
+        System.out.println("\n--- ADD CUSTOMER ---");
+
+        System.out.print("Enter customer ID: ");
+        int id = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        System.out.print("Enter customer name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter membership level (Standard/Silver/Gold/Platinum): ");
+        String membership = scanner.nextLine();
+
+        System.out.print("Enter total purchases (KZT): ");
+        double purchases = scanner.nextDouble();
+        scanner.nextLine(); // Consume newline
+
+        Customer customer = new Customer(id, name, membership, purchases);
+        customers.add(customer);
+
+        System.out.println("\n✅ Customer added successfully!");
+        System.out.println(customer);
+    }
+
+    private static void viewAllCustomers() {
+        System.out.println("\n========================================");
+        System.out.println("          ALL CUSTOMERS");
+        System.out.println("========================================");
+
+        if (customers.isEmpty()) {
+            System.out.println("❌ No customers found.");
+            return;
+        }
+
+        System.out.println("Total customers: " + customers.size());
+        System.out.println();
+
+        for (int i = 0; i < customers.size(); i++) {
+            Customer customer = customers.get(i);
+            System.out.println((i + 1) + ". " + customer.getName());
+            System.out.println("   ID: " + customer.getCustomerId());
+            System.out.println("   Membership: " + customer.getMembershipLevel());
+            System.out.println("   Total Purchases: " + customer.getFormattedPurchases());
+            System.out.println("   Discount: " + customer.getDiscountPercentage() + "%");
+            System.out.println("   VIP Status: " + (customer.isVIP() ? "⭐ Yes" : "No"));
+            System.out.println();
+        }
+    }
+
+    private static void addSale() {
+        System.out.println("\n--- ADD SALE ---");
+
+        System.out.print("Enter sale ID: ");
+        int id = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        System.out.print("Enter customer name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Enter total amount (KZT): ");
+        double amount = scanner.nextDouble();
+        scanner.nextLine(); // Consume newline
+
+        System.out.print("Enter date (YYYY-MM-DD): ");
+        String date = scanner.nextLine();
+
+        Sale sale = new Sale(id, customerName, amount, date);
+        sales.add(sale);
+
+        System.out.println("\n✅ Sale added successfully!");
+        System.out.println(sale);
+    }
+
+    private static void viewAllSales() {
+        System.out.println("\n========================================");
+        System.out.println("           ALL SALES");
+        System.out.println("========================================");
+
+        if (sales.isEmpty()) {
+            System.out.println("❌ No sales found.");
+            return;
+        }
+
+        System.out.println("Total sales: " + sales.size());
+        System.out.println();
+
+        double totalRevenue = 0;
+
+        for (int i = 0; i < sales.size(); i++) {
+            Sale sale = sales.get(i);
+            System.out.println((i + 1) + ". Sale #" + sale.getSaleId());
+            System.out.println("   Customer: " + sale.getCustomerName());
+            System.out.println("   Amount: " + sale.getFormattedTotal());
+            System.out.println("   Tax (12%): " + String.format("%.2f KZT", sale.calculateTax()));
+            System.out.println("   Total with Tax: " + sale.getFormattedTotalWithTax());
+            System.out.println("   Date: " + sale.getDate());
+            System.out.println("   " + (sale.isLargeSale() ? "💰 Large Sale" : "Regular Sale"));
+            System.out.println();
+
+            totalRevenue += sale.getTotalAmount();
+        }
+
+        System.out.println("📊 Total Revenue: " + String.format("%.2f KZT", totalRevenue));
+    }
 }

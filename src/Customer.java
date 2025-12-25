@@ -7,9 +7,9 @@ public class Customer {
 
     public Customer(int customerId, String name, String membershipLevel, double totalPurchases) {
         this.customerId = customerId;
-        this.name = name;
+        setName(name);
         this.membershipLevel = membershipLevel;
-        this.totalPurchases = totalPurchases;
+        setTotalPurchases(totalPurchases);
     }
 
     public Customer() {
@@ -35,20 +35,41 @@ public class Customer {
         return totalPurchases;
     }
 
+    // SETTERS WITH VALIDATION
     public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+        if (customerId > 0) {
+            this.customerId = customerId;
+        } else {
+            System.out.println("⚠️ Warning: Customer ID must be positive! Setting to 0.");
+            this.customerId = 0;
+        }
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name != null && !name.trim().isEmpty()) {
+            this.name = name;
+        } else {
+            System.out.println("⚠️ Warning: Name cannot be empty! Setting to 'Unknown Customer'.");
+            this.name = "Unknown Customer";
+        }
     }
 
     public void setMembershipLevel(String membershipLevel) {
-        this.membershipLevel = membershipLevel;
+        if (membershipLevel != null && !membershipLevel.trim().isEmpty()) {
+            this.membershipLevel = membershipLevel;
+        } else {
+            this.membershipLevel = "Standard";
+        }
     }
 
     public void setTotalPurchases(double totalPurchases) {
-        this.totalPurchases = totalPurchases;
+        if (totalPurchases >= 0) {
+            this.totalPurchases = totalPurchases;
+            updateMembershipLevel();
+        } else {
+            System.out.println("⚠️ Warning: Total purchases cannot be negative! Setting to 0.");
+            this.totalPurchases = 0.0;
+        }
     }
 
     // ADDITIONAL METHODS (minimum 2)
@@ -57,14 +78,19 @@ public class Customer {
         return totalPurchases > 50000;
     }
 
+    // Add purchase amount with validation
     public void addPurchase(double amount) {
         if (amount > 0) {
             this.totalPurchases += amount;
             updateMembershipLevel();
+            System.out.println("✅ Added " + String.format("%.2f", amount) + " KZT to " + name);
+        } else {
+            System.out.println("❌ Purchase amount must be positive!");
         }
     }
 
     private void updateMembershipLevel() {
+        String oldLevel = this.membershipLevel;
         if (totalPurchases >= 100000) {
             this.membershipLevel = "Platinum";
         } else if (totalPurchases >= 50000) {
@@ -74,9 +100,12 @@ public class Customer {
         } else {
             this.membershipLevel = "Standard";
         }
+
+        if (!oldLevel.equals(this.membershipLevel)) {
+            System.out.println("🎉 Membership upgraded to " + this.membershipLevel + "!");
+        }
     }
 
-    // Get discount percentage based on membership
     public double getDiscountPercentage() {
         switch (membershipLevel) {
             case "Platinum":
@@ -90,13 +119,17 @@ public class Customer {
         }
     }
 
+    public String getFormattedPurchases() {
+        return String.format("%.2f KZT", totalPurchases);
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
                 "customerId=" + customerId +
                 ", name='" + name + '\'' +
                 ", membershipLevel='" + membershipLevel + '\'' +
-                ", totalPurchases=" + totalPurchases +
+                ", totalPurchases=" + String.format("%.2f", totalPurchases) +
                 " KZT}";
     }
 }
