@@ -81,7 +81,7 @@ public class Sale {
             this.totalAmount += itemPrice;
             System.out.println("✅ Added item worth " + String.format("%.2f", itemPrice) + " KZT");
         } else {
-            System.out.println("❌ Item price must be positive!");
+            System.out.println("❌ Item price must be positive! ");
         }
     }
 

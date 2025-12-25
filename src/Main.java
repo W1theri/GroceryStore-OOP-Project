@@ -54,7 +54,7 @@ public class Main {
                     running = false;
                     break;
                 default:
-                    System.out.println("\n❌ Invalid choice! Please enter a number from the menu.");
+                    System.out.println("\n❌ Invalid choice! Please enter a number from the menu. ");
             }
 
             if (running) {

@@ -40,7 +40,7 @@ public class Customer {
         if (customerId > 0) {
             this.customerId = customerId;
         } else {
-            System.out.println("⚠️ Warning: Customer ID must be positive! Setting to 0.");
+            System.out.println("⚠️ Warning: Customer ID must be positive! Setting to 0. ");
             this.customerId = 0;
         }
     }

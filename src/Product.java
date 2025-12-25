@@ -40,7 +40,7 @@ public class Product {
         if (productId > 0) {
             this.productId = productId;
         } else {
-            System.out.println("⚠️ Warning: Product ID must be positive! Setting to 0.");
+            System.out.println("⚠️ Warning: Product ID must be positive! Setting to 0");
             this.productId = 0;
         }
     }
