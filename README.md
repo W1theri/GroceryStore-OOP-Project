@@ -6,11 +6,11 @@ A Java-based grocery store management system implementing core OOP principles: c
 
 ## Project Structure
 
-src
-├Main.java     - Main program demonstrating all features
-├Product.java  - Grocery product management
-├Customer.java - Customer and membership system
-└Sale.java     - Sales transaction handling
+SRC
+Main.java     - Main program demonstrating all features
+Product.java  - Grocery product management
+Customer.java - Customer and membership system
+Sale.java     - Sales transaction handling
 
 
 ## Features
