@@ -16,7 +16,7 @@ src/
 ## Features
 
 ### Product Class
-- Track product inventory (ID, name, price, stock)
+- Track product inventory (ID, name, price,stock)
 - Check stock availability
 - Restock products
 - Apply discounts
