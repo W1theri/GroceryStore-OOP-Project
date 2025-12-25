@@ -4,14 +4,6 @@ OOP Course Project - Week 2
 
 A Java-based grocery store management system implementing core OOP principles: classes, objects, encapsulation, and methods.
 
-## Project Structure
-
-SRC
-Main.java     - Main program demonstrating all features
-Product.java  - Grocery product management
-Customer.java - Customer and membership system
-Sale.java     - Sales transaction handling
-
 
 ## Features
 
