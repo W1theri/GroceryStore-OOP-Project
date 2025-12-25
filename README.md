@@ -39,7 +39,7 @@ src
 
 1. Clone the repository:
 
-git clone https://github.com/W1theri/GroceryStore-OOP-Project.git
+git clone  https://github.com/W1theri/GroceryStore-OOP-Project.git
 
 
 2. Open in IntelliJ IDEA
