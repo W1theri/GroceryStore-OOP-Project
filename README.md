@@ -29,7 +29,7 @@ A Java-based grocery store management system with interactive console menu, impl
 ```
 
 ##  Validation Rules
-
+ 
 ### Product Validation
 -  Product ID must be positive
 -  Name cannot be empty
