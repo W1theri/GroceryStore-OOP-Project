@@ -56,19 +56,11 @@ A comprehensive Java-based grocery store management system with interactive cons
 ### Inheritance Structure
 
 Product (Parent Class)
-├── Protected fields: productId, name, price, stockQuantity
-├── Methods: isInStock(), restock(), sell(), applyDiscount()
-│
-├─── FreshProduct (Child Class)
-│    ├── Additional fields: expiryDate, isOrganic
-│    ├── Overridden methods: isInStock(), toString()
-│    └── Unique methods: isExpired(), markAsExpired(), displayFreshnessInfo()
-│
-└─── PackagedProduct (Child Class)
-     ├── Additional fields: manufacturer, weight
-     ├── Overridden methods: getFormattedPrice(), toString()
-     └── Unique methods: getPricePerKg(), isBulk(), displayPackageInfo()
-`
+
+FreshProduct (Child Class)
+
+PackagedProduct (Child Class)
+
 
 ##  Validation Rules
 
