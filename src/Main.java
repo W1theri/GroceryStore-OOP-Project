@@ -9,44 +9,59 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        products.add(new Product(101, "Milk", 650.0, 50));
-        products.add(new Product(102, "Bread", 200.0, 100));
-        products.add(new Product(103, "Eggs", 800.0, 30));
+        products.add(new Product(101, "Rice", 1200.0, 200));
+        products.add(new FreshProduct(102, "Apple", 500.0, 150, "2025-01-20", true));
+        products.add(new FreshProduct(103, "Tomato", 800.0, 100, "2025-01-18", false));
+        products.add(new PackagedProduct(104, "Chocolate", 450.0, 80, "Rakhat", 100));
+        products.add(new PackagedProduct(105, "Flour", 2500.0, 50, "Kazakhstan", 2000));
 
         customers.add(new Customer(1001, "Aidar Nurbek", "Standard", 15000.0));
         customers.add(new Customer(1002, "Aliya Kairat", "Gold", 65000.0));
-        customers.add(new Customer(1003, "Arman Bekzat", "Silver", 25000.0));
 
         sales.add(new Sale(5001, "Aidar Nurbek", 3500.0, "2025-01-15"));
-        sales.add(new Sale(5002, "Aliya Kairat", 12000.0, "2025-01-15"));
 
-        // Menu loop
         boolean running = true;
 
-        System.out.println("\n🎉 Welcome to Grocery Store Management System! 🎉");
+        System.out.println("\nWelcome to Grocery Store Management System! ");
+        System.out.println("Added New INHERITANCE & POLYMORPHISM! ");
 
         while (running) {
             displayMenu();
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            int choice = getIntInput();
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
-                    addProduct();
+                    addGeneralProduct();
                     break;
                 case 2:
-                    viewAllProducts();
+                    addFreshProduct();
                     break;
                 case 3:
-                    addCustomer();
+                    addPackagedProduct();
                     break;
                 case 4:
-                    viewAllCustomers();
+                    viewAllProducts();
                     break;
                 case 5:
-                    addSale();
+                    demonstratePolymorphism();
                     break;
                 case 6:
+                    viewFreshProductsOnly();
+                    break;
+                case 7:
+                    viewPackagedProductsOnly();
+                    break;
+                case 8:
+                    addCustomer();
+                    break;
+                case 9:
+                    viewAllCustomers();
+                    break;
+                case 10:
+                    addSale();
+                    break;
+                case 11:
                     viewAllSales();
                     break;
                 case 0:
@@ -54,7 +69,7 @@ public class Main {
                     running = false;
                     break;
                 default:
-                    System.out.println("\n❌ Invalid choice! Please enter a number from the menu. ");
+                    System.out.println("\n❌ Invalid choice! Please enter a valid number.");
             }
 
             if (running) {
@@ -67,49 +82,125 @@ public class Main {
     }
 
     private static void displayMenu() {
-        System.out.println("\n========================================");
-        System.out.println("    🛒 GROCERY STORE SYSTEM 🛒");
-        System.out.println("========================================");
-        System.out.println("1. Add Product");
-        System.out.println("2. View All Products");
-        System.out.println("3. Add Customer");
-        System.out.println("4. View All Customers");
-        System.out.println("5. Add Sale");
-        System.out.println("6. View All Sales");
-        System.out.println("0. Exit");
-        System.out.println("========================================");
+        System.out.println("\n╔════════════════════════════════════════╗");
+        System.out.println("║     GROCERY STORE SYSTEM               ║");
+        System.out.println("║     With Inheritance                   ║");
+        System.out.println("╚════════════════════════════════════════╝");
+        System.out.println("┌────────────────────────────────────────┐");
+        System.out.println("│  PRODUCT MANAGEMENT                    │");
+        System.out.println("│  1. 📦 Add General Product             │");
+        System.out.println("│  2. 🍎 Add Fresh Product               │");
+        System.out.println("│  3. 📦 Add Packaged Product            │");
+        System.out.println("│  4. 📋 View All Products (Polymorphic) │");
+        System.out.println("│  5. ✨ Demonstrate Polymorphism        │");
+        System.out.println("│  6. 🍎 View Fresh Products Only        │");
+        System.out.println("│  7. 📦 View Packaged Products Only     │");
+        System.out.println("├────────────────────────────────────────┤");
+        System.out.println("│  CUSTOMER & SALES                      │");
+        System.out.println("│  8. 👤 Add Customer                    │");
+        System.out.println("│  9. 👥 View All Customers              │");
+        System.out.println("│  10. 🛍️  Add Sale                      │");
+        System.out.println("│  11. 📊 View All Sales                 │");
+        System.out.println("├────────────────────────────────────────┤");
+        System.out.println("│  0. 🚪 Exit                            │");
+        System.out.println("└────────────────────────────────────────┘");
         System.out.print("Enter your choice: ");
     }
 
-    private static void addProduct() {
-        System.out.println("\n--- ADD PRODUCT ---");
+
+    private static void addGeneralProduct() {
+        System.out.println("\n--- ADD GENERAL PRODUCT ---");
 
         System.out.print("Enter product ID: ");
-        int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        int id = getIntInput();
+        scanner.nextLine();
 
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
 
         System.out.print("Enter price (KZT): ");
-        double price = scanner.nextDouble();
-        scanner.nextLine(); // Consume newline
+        double price = getDoubleInput();
+        scanner.nextLine();
 
         System.out.print("Enter stock quantity: ");
-        int stock = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        int stock = getIntInput();
+        scanner.nextLine();
 
         Product product = new Product(id, name, price, stock);
         products.add(product);
 
-        System.out.println("\n✅ Product added successfully!");
+        System.out.println("\n✅ General product added successfully!");
+        System.out.println(product);
+    }
+
+    private static void addFreshProduct() {
+        System.out.println("\n--- ADD FRESH PRODUCT 🍎 ---");
+
+        System.out.print("Enter product ID: ");
+        int id = getIntInput();
+        scanner.nextLine();
+
+        System.out.print("Enter product name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter price (KZT): ");
+        double price = getDoubleInput();
+        scanner.nextLine();
+
+        System.out.print("Enter stock quantity: ");
+        int stock = getIntInput();
+        scanner.nextLine();
+
+        System.out.print("Enter expiry date (YYYY-MM-DD): ");
+        String expiryDate = scanner.nextLine();
+
+        System.out.print("Is organic? (true/false): ");
+        boolean isOrganic = getBooleanInput();
+        scanner.nextLine();
+
+        Product product = new FreshProduct(id, name, price, stock, expiryDate, isOrganic);
+        products.add(product);
+
+        System.out.println("\n✅ Fresh product added successfully!");
+        System.out.println(product);
+    }
+
+    private static void addPackagedProduct() {
+        System.out.println("\n--- ADD PACKAGED PRODUCT 📦 ---");
+
+        System.out.print("Enter product ID: ");
+        int id = getIntInput();
+        scanner.nextLine();
+
+        System.out.print("Enter product name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter price (KZT): ");
+        double price = getDoubleInput();
+        scanner.nextLine();
+
+        System.out.print("Enter stock quantity: ");
+        int stock = getIntInput();
+        scanner.nextLine();
+
+        System.out.print("Enter manufacturer: ");
+        String manufacturer = scanner.nextLine();
+
+        System.out.print("Enter weight (grams): ");
+        double weight = getDoubleInput();
+        scanner.nextLine();
+
+        Product product = new PackagedProduct(id, name, price, stock, manufacturer, weight);
+        products.add(product);
+
+        System.out.println("\n✅ Packaged product added successfully!");
         System.out.println(product);
     }
 
     private static void viewAllProducts() {
-        System.out.println("\n========================================");
-        System.out.println("          ALL PRODUCTS");
-        System.out.println("========================================");
+        System.out.println("\n╔════════════════════════════════════════╗");
+        System.out.println("║     📋 ALL PRODUCTS (POLYMORPHIC)      ║");
+        System.out.println("╚════════════════════════════════════════╝");
 
         if (products.isEmpty()) {
             System.out.println("❌ No products found.");
@@ -117,29 +208,111 @@ public class Main {
         }
 
         System.out.println("Total products: " + products.size());
-        System.out.println();
+        System.out.println("─────────────────────────────────────────");
 
         for (int i = 0; i < products.size(); i++) {
-            Product product = products.get(i);
-            System.out.println((i + 1) + ". " + product.getName() +
-                    " - " + product.getFormattedPrice());
-            System.out.println("   ID: " + product.getProductId());
-            System.out.println("   Stock: " + product.getStockQuantity() + " units");
-            System.out.println("   In Stock: " + (product.isInStock() ? "✅ Yes" : "❌ No"));
+            Product p = products.get(i);
+            System.out.println("\n" + (i + 1) + ". " + p);
 
-            if (product.isExpensive()) {
+            if (p instanceof FreshProduct) {
+                FreshProduct fresh = (FreshProduct) p;
+                System.out.println("   🍎 Fresh Product Details:");
+                System.out.println("   Expiry: " + fresh.getExpiryDate());
+                System.out.println("   Days Until Expiry: " + fresh.getDaysUntilExpiry());
+                if (fresh.isOrganic()) {
+                    System.out.println("   🌿 ORGANIC CERTIFIED");
+                }
+            } else if (p instanceof PackagedProduct) {
+                PackagedProduct packaged = (PackagedProduct) p;
+                System.out.println("   📦 Packaged Product Details:");
+                System.out.println("   Manufacturer: " + packaged.getManufacturer());
+                System.out.println("   Weight: " + packaged.getWeight() + "g");
+                System.out.println("   Price per kg: " + String.format("%.2f KZT", packaged.getPricePerKg()));
+
+                if (packaged.isBulk()) {
+                    System.out.println("   📦 BULK PACKAGE");
+                }
+            }
+
+            if (p.isExpensive()) {
                 System.out.println("   💎 Premium Product");
             }
-            System.out.println();
         }
     }
+
+    private static void demonstratePolymorphism() {
+        System.out.println("\n╔════════════════════════════════════════╗");
+        System.out.println("║   ✨ POLYMORPHISM DEMONSTRATION ✨     ║");
+        System.out.println("╚════════════════════════════════════════╝");
+        System.out.println("\nCalling isInStock() on all products:");
+        System.out.println("(Same method name, different behavior!)\n");
+        System.out.println("─────────────────────────────────────────");
+
+        for (Product p : products) {
+            System.out.print(p.getName() + " - ");
+            boolean inStock = p.isInStock();
+            System.out.println(inStock ? "✅ In Stock" : "❌ Out of Stock");
+            System.out.println("   Type: " + p.getProductType());
+        }
+
+        System.out.println("\n─────────────────────────────────────────");
+        System.out.println("✨ Notice: Same method call (isInStock())");
+        System.out.println("   but different logic for FreshProduct!");
+        System.out.println("   This is POLYMORPHISM in action! 🎭");
+    }
+
+    private static void viewFreshProductsOnly() {
+        System.out.println("\n╔════════════════════════════════════════╗");
+        System.out.println("║       🍎 FRESH PRODUCTS ONLY 🍎        ║");
+        System.out.println("╚════════════════════════════════════════╝");
+
+        int count = 0;
+        for (Product p : products) {
+            if (p instanceof FreshProduct) {
+                count++;
+                FreshProduct fresh = (FreshProduct) p;
+                System.out.println("\n" + count + ". " + fresh.getName());
+                fresh.displayFreshnessInfo();
+            }
+        }
+
+        if (count == 0) {
+            System.out.println("❌ No fresh products found.");
+        } else {
+            System.out.println("\n📊 Total fresh products: " + count);
+        }
+    }
+
+    private static void viewPackagedProductsOnly() {
+        System.out.println("\n╔════════════════════════════════════════╗");
+        System.out.println("║     📦 PACKAGED PRODUCTS ONLY 📦       ║");
+        System.out.println("╚════════════════════════════════════════╝");
+
+        int count = 0;
+        for (Product p : products) {
+            if (p instanceof PackagedProduct) {
+                count++;
+                PackagedProduct packaged = (PackagedProduct) p;
+                System.out.println("\n" + count + ". " + packaged.getName());
+                packaged.displayPackageInfo();
+            }
+        }
+
+        if (count == 0) {
+            System.out.println("❌ No packaged products found.");
+        } else {
+            System.out.println("\n📊 Total packaged products: " + count);
+        }
+    }
+
+
 
     private static void addCustomer() {
         System.out.println("\n--- ADD CUSTOMER ---");
 
         System.out.print("Enter customer ID: ");
-        int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        int id = getIntInput();
+        scanner.nextLine();
 
         System.out.print("Enter customer name: ");
         String name = scanner.nextLine();
@@ -148,8 +321,8 @@ public class Main {
         String membership = scanner.nextLine();
 
         System.out.print("Enter total purchases (KZT): ");
-        double purchases = scanner.nextDouble();
-        scanner.nextLine(); // Consume newline
+        double purchases = getDoubleInput();
+        scanner.nextLine();
 
         Customer customer = new Customer(id, name, membership, purchases);
         customers.add(customer);
@@ -160,7 +333,7 @@ public class Main {
 
     private static void viewAllCustomers() {
         System.out.println("\n========================================");
-        System.out.println("          ALL CUSTOMEРS");
+        System.out.println("          ALL CUSTOMERS");
         System.out.println("========================================");
 
         if (customers.isEmpty()) {
@@ -183,19 +356,20 @@ public class Main {
         }
     }
 
+
     private static void addSale() {
         System.out.println("\n--- ADD SALE ---");
 
         System.out.print("Enter sale ID: ");
-        int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        int id = getIntInput();
+        scanner.nextLine();
 
         System.out.print("Enter customer name: ");
         String customerName = scanner.nextLine();
 
         System.out.print("Enter total amount (KZT): ");
-        double amount = scanner.nextDouble();
-        scanner.nextLine(); // Consume newline
+        double amount = getDoubleInput();
+        scanner.nextLine();
 
         System.out.print("Enter date (YYYY-MM-DD): ");
         String date = scanner.nextLine();
@@ -237,5 +411,30 @@ public class Main {
         }
 
         System.out.println("📊 Total Revenue: " + String.format("%.2f KZT", totalRevenue));
+    }
+
+
+    private static int getIntInput() {
+        while (!scanner.hasNextInt()) {
+            System.out.print("❌ Invalid input! Please enter a number: ");
+            scanner.next();
+        }
+        return scanner.nextInt();
+    }
+
+    private static double getDoubleInput() {
+        while (!scanner.hasNextDouble()) {
+            System.out.print("❌ Invalid input! Please enter a number: ");
+            scanner.next();
+        }
+        return scanner.nextDouble();
+    }
+
+    private static boolean getBooleanInput() {
+        while (!scanner.hasNextBoolean()) {
+            System.out.print("❌ Invalid input! Please enter true or false: ");
+            scanner.next();
+        }
+        return scanner.nextBoolean();
     }
 }

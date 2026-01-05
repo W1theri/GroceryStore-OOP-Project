@@ -1,9 +1,8 @@
 public class Product {
-    // PRIVATE FIELDS
-    private int productId;
-    private String name;
-    private double price;
-    private int stockQuantity;
+    protected int productId;
+    protected String name;
+    protected double price;
+    protected int stockQuantity;
 
     public Product(int productId, String name, double price, int stockQuantity) {
         this.productId = productId;
@@ -35,7 +34,6 @@ public class Product {
         return stockQuantity;
     }
 
-    // SETTERS WITH VALIDATION
     public void setProductId(int productId) {
         if (productId > 0) {
             this.productId = productId;
@@ -72,14 +70,15 @@ public class Product {
         }
     }
 
-    // ADDITIONAL METHODS (minimum 2)
 
-    // Checking if product is in stock
     public boolean isInStock() {
         return stockQuantity > 0;
     }
 
-    // Restock product with validation
+    public String getProductType() {
+        return "General Product";
+    }
+
     public void restock(int quantity) {
         if (quantity > 0) {
             this.stockQuantity += quantity;
@@ -89,7 +88,6 @@ public class Product {
         }
     }
 
-    // Sell product (reduce stock) with validation
     public boolean sell(int quantity) {
         if (quantity <= 0) {
             System.out.println("❌ Sell quantity must be positive!");
@@ -107,8 +105,9 @@ public class Product {
     public void applyDiscount(double percentage) {
         if (percentage > 0 && percentage <= 100) {
             this.price = this.price * (1 - percentage / 100);
+            System.out.println("✅ Discount applied successfully!");
         } else {
-            System.out.println("❌ Invalid discount рercentage! Must be between 0 and 100.");
+            System.out.println("❌ Invalid discount percentage! Must be between 0 and 100.");
         }
     }
 
@@ -122,7 +121,8 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "[" + getProductType() + "] " +
+                "Product{" +
                 "productId=" + productId +
                 ", name='" + name + '\'' +
                 ", price=" + String.format("%.2f", price) +
