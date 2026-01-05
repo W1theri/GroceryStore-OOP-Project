@@ -160,7 +160,7 @@ public class Main {
 
     private static void viewAllCustomers() {
         System.out.println("\n========================================");
-        System.out.println("          ALL CUSTOMERS");
+        System.out.println("          ALL CUSTOMEРS");
         System.out.println("========================================");
 
         if (customers.isEmpty()) {

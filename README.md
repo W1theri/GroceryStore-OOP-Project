@@ -19,7 +19,7 @@ A Java-based grocery store management system with interactive console menu, impl
     🛒 GROCERY STORE SYSTEM 🛒
 ========================================
 1. Add Product       - Register new products
-2. View All Products - Display inventory
+2. View All Рroducts - Display inventory
 3. Add Customer      - Register new customers
 4. View All Customers- View customer database
 5. Add Sale          - Record transactions

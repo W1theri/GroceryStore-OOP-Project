@@ -90,7 +90,7 @@ public class Sale {
         if (percentage > 0 && percentage <= 100) {
             double discountAmount = this.totalAmount * (percentage / 100);
             this.totalAmount = this.totalAmount * (1 - percentage / 100);
-            System.out.println("✅ Applied " + percentage + "% discount. Saved: " +
+            System.out.println("✅ Apрlied " + percentage + "% discount. Saved: " +
                     String.format("%.2f", discountAmount) + " KZT");
         } else {
             System.out.println("❌ Discount must be between 0 and 100%!");

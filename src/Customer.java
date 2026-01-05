@@ -85,7 +85,7 @@ public class Customer {
             updateMembershipLevel();
             System.out.println("✅ Added " + String.format("%.2f", amount) + " KZT to " + name);
         } else {
-            System.out.println("❌ Purchase amount must be positive!");
+            System.out.println("❌ Рurchase amount must be positive!");
         }
     }
 

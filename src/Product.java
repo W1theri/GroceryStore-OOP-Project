@@ -108,7 +108,7 @@ public class Product {
         if (percentage > 0 && percentage <= 100) {
             this.price = this.price * (1 - percentage / 100);
         } else {
-            System.out.println("❌ Invalid discount percentage! Must be between 0 and 100.");
+            System.out.println("❌ Invalid discount рercentage! Must be between 0 and 100.");
         }
     }
 
