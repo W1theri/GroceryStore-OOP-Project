@@ -1,11 +1,9 @@
 public class Sale {
-    // PRIVATE FIELDS
     private int saleId;
     private String customerName;
     private double totalAmount;
     private String date;
 
-    // CONSTRUCTOR WITH PARAMETERS (with validation)
     public Sale(int saleId, String customerName, double totalAmount, String date) {
         this.saleId = saleId;
         setCustomerName(customerName);
@@ -36,7 +34,7 @@ public class Sale {
         return date;
     }
 
-    // SETTERS WITH VALIDATION
+
     public void setSaleId(int saleId) {
         if (saleId > 0) {
             this.saleId = saleId;
@@ -75,7 +73,6 @@ public class Sale {
 
     // ADDITIONAL METHODS (minimum 2)
 
-    // Add item to sale with validation
     public void addItem(double itemPrice) {
         if (itemPrice > 0) {
             this.totalAmount += itemPrice;
@@ -85,7 +82,7 @@ public class Sale {
         }
     }
 
-    // Apply discount to total with validation
+
     public void applyDiscount(double percentage) {
         if (percentage > 0 && percentage <= 100) {
             double discountAmount = this.totalAmount * (percentage / 100);

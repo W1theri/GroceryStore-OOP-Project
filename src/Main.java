@@ -5,7 +5,6 @@ public class Main {
     private static ArrayList<Product> products = new ArrayList<>();
     private static ArrayList<Customer> customers = new ArrayList<>();
     private static ArrayList<Sale> sales = new ArrayList<>();
-
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {

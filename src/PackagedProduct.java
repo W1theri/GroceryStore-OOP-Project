@@ -1,6 +1,6 @@
 public class PackagedProduct extends Product {
     private String manufacturer;
-    private double weight; // в граммах
+    private double weight;
 
     public PackagedProduct(int productId, String name, double price, int stockQuantity,
                            String manufacturer, double weight) {
@@ -54,13 +54,12 @@ public class PackagedProduct extends Product {
                 " | Weight: " + weight + "g";
     }
 
-    // Уникальные методы для PackagedProduct
     public boolean isLightweight() {
-        return weight < 500; // Меньше 500 грамм
+        return weight < 500;
     }
 
     public boolean isBulk() {
-        return weight > 2000; // Больше 2 кг
+        return weight > 2000;
     }
 
     public double getPricePerKg() {

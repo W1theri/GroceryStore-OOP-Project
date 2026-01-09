@@ -54,7 +54,7 @@ public class FreshProduct extends Product {
 
     public void markAsExpired() {
         this.expiryDate = "Expired";
-        setStockQuantity(0); // Убираем из продажи
+        setStockQuantity(0);
         System.out.println("⚠️ Product " + getName() + " has been marked as expired!");
     }
 

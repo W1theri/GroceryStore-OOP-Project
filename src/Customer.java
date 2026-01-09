@@ -1,5 +1,4 @@
 public class Customer {
-    // PRIVATE FIELDS
     private int customerId;
     private String name;
     private String membershipLevel;
@@ -35,7 +34,6 @@ public class Customer {
         return totalPurchases;
     }
 
-    // SETTERS WITH VALIDATION
     public void setCustomerId(int customerId) {
         if (customerId > 0) {
             this.customerId = customerId;
@@ -78,7 +76,6 @@ public class Customer {
         return totalPurchases > 50000;
     }
 
-    // Add purchase amount with validation
     public void addPurchase(double amount) {
         if (amount > 0) {
             this.totalPurchases += amount;
