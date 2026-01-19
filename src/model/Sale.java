@@ -1,3 +1,5 @@
+package model;
+
 public class Sale {
     private int saleId;
     private String customerName;
@@ -5,7 +7,7 @@ public class Sale {
     private String date;
 
     public Sale(int saleId, String customerName, double totalAmount, String date) {
-        this.saleId = saleId;
+        setSaleId(saleId);
         setCustomerName(customerName);
         setTotalAmount(totalAmount);
         setDate(date);
@@ -34,64 +36,51 @@ public class Sale {
         return date;
     }
 
-
     public void setSaleId(int saleId) {
-        if (saleId > 0) {
-            this.saleId = saleId;
-        } else {
-            System.out.println("⚠️ Warning: Sale ID must be positive! Setting to 0.");
-            this.saleId = 0;
+        if (saleId <= 0) {
+            throw new IllegalArgumentException("Sale ID must be positive, got: " + saleId);
         }
+        this.saleId = saleId;
     }
 
     public void setCustomerName(String customerName) {
-        if (customerName != null && !customerName.trim().isEmpty()) {
-            this.customerName = customerName;
-        } else {
-            System.out.println("⚠️ Warning: Customer name cannot be empty! Setting to 'Unknown'.");
-            this.customerName = "Unknown";
+        if (customerName == null || customerName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Customer name cannot be empty");
         }
+        this.customerName = customerName;
     }
 
     public void setTotalAmount(double totalAmount) {
-        if (totalAmount >= 0) {
-            this.totalAmount = totalAmount;
-        } else {
-            System.out.println("⚠️ Warning: Total amount cannot be negative! Setting to 0.");
-            this.totalAmount = 0.0;
+        if (totalAmount < 0) {
+            throw new IllegalArgumentException("Total amount cannot be negative, got: " + totalAmount);
         }
+        this.totalAmount = totalAmount;
     }
 
     public void setDate(String date) {
-        if (date != null && !date.trim().isEmpty()) {
-            this.date = date;
-        } else {
-            System.out.println("⚠️ Warning: Date cannot be empty! Setting to 'Not set'.");
-            this.date = "Not set";
+        if (date == null || date.trim().isEmpty()) {
+            throw new IllegalArgumentException("Date cannot be empty");
         }
+        this.date = date;
     }
 
-    // ADDITIONAL METHODS (minimum 2)
-
+    // ADDITIONAL METHODS
     public void addItem(double itemPrice) {
-        if (itemPrice > 0) {
-            this.totalAmount += itemPrice;
-            System.out.println("✅ Added item worth " + String.format("%.2f", itemPrice) + " KZT");
-        } else {
-            System.out.println("❌ Item price must be positive! ");
+        if (itemPrice <= 0) {
+            throw new IllegalArgumentException("Item price must be positive, got: " + itemPrice);
         }
+        this.totalAmount += itemPrice;
+        System.out.println("✅ Added item worth " + String.format("%.2f", itemPrice) + " KZT");
     }
-
 
     public void applyDiscount(double percentage) {
-        if (percentage > 0 && percentage <= 100) {
-            double discountAmount = this.totalAmount * (percentage / 100);
-            this.totalAmount = this.totalAmount * (1 - percentage / 100);
-            System.out.println("✅ Apрlied " + percentage + "% discount. Saved: " +
-                    String.format("%.2f", discountAmount) + " KZT");
-        } else {
-            System.out.println("❌ Discount must be between 0 and 100%!");
+        if (percentage <= 0 || percentage > 100) {
+            throw new IllegalArgumentException("Discount must be between 0 and 100%, got: " + percentage);
         }
+        double discountAmount = this.totalAmount * (percentage / 100);
+        this.totalAmount = this.totalAmount * (1 - percentage / 100);
+        System.out.println("✅ Applied " + percentage + "% discount. Saved: " +
+                String.format("%.2f", discountAmount) + " KZT");
     }
 
     public double calculateTax() {

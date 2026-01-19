@@ -1,3 +1,5 @@
+package model;
+
 public class Customer {
     private int customerId;
     private String name;
@@ -5,7 +7,7 @@ public class Customer {
     private double totalPurchases;
 
     public Customer(int customerId, String name, String membershipLevel, double totalPurchases) {
-        this.customerId = customerId;
+        setCustomerId(customerId);
         setName(name);
         this.membershipLevel = membershipLevel;
         setTotalPurchases(totalPurchases);
@@ -35,55 +37,46 @@ public class Customer {
     }
 
     public void setCustomerId(int customerId) {
-        if (customerId > 0) {
-            this.customerId = customerId;
-        } else {
-            System.out.println("⚠️ Warning: Customer ID must be positive! Setting to 0. ");
-            this.customerId = 0;
+        if (customerId <= 0) {
+            throw new IllegalArgumentException("Customer ID must be positive, got: " + customerId);
         }
+        this.customerId = customerId;
     }
 
     public void setName(String name) {
-        if (name != null && !name.trim().isEmpty()) {
-            this.name = name;
-        } else {
-            System.out.println("⚠️ Warning: Name cannot be empty! Setting to 'Unknown Customer'.");
-            this.name = "Unknown Customer";
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Customer name cannot be empty");
         }
+        this.name = name;
     }
 
     public void setMembershipLevel(String membershipLevel) {
-        if (membershipLevel != null && !membershipLevel.trim().isEmpty()) {
-            this.membershipLevel = membershipLevel;
-        } else {
-            this.membershipLevel = "Standard";
+        if (membershipLevel == null || membershipLevel.trim().isEmpty()) {
+            throw new IllegalArgumentException("Membership level cannot be empty");
         }
+        this.membershipLevel = membershipLevel;
     }
 
     public void setTotalPurchases(double totalPurchases) {
-        if (totalPurchases >= 0) {
-            this.totalPurchases = totalPurchases;
-            updateMembershipLevel();
-        } else {
-            System.out.println("⚠️ Warning: Total purchases cannot be negative! Setting to 0.");
-            this.totalPurchases = 0.0;
+        if (totalPurchases < 0) {
+            throw new IllegalArgumentException("Total purchases cannot be negative, got: " + totalPurchases);
         }
+        this.totalPurchases = totalPurchases;
+        updateMembershipLevel();
     }
 
-    // ADDITIONAL METHODS (minimum 2)
-
+    // ADDITIONAL METHODS
     public boolean isVIP() {
         return totalPurchases > 50000;
     }
 
     public void addPurchase(double amount) {
-        if (amount > 0) {
-            this.totalPurchases += amount;
-            updateMembershipLevel();
-            System.out.println("✅ Added " + String.format("%.2f", amount) + " KZT to " + name);
-        } else {
-            System.out.println("❌ Рurchase amount must be positive!");
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Purchase amount must be positive, got: " + amount);
         }
+        this.totalPurchases += amount;
+        updateMembershipLevel();
+        System.out.println("✅ Added " + String.format("%.2f", amount) + " KZT to " + name);
     }
 
     private void updateMembershipLevel() {

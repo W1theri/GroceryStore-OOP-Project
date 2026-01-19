@@ -1,11 +1,13 @@
-public class Product {
+package model;
+
+public abstract class Product {
     protected int productId;
     protected String name;
     protected double price;
     protected int stockQuantity;
 
     public Product(int productId, String name, double price, int stockQuantity) {
-        this.productId = productId;
+        setProductId(productId);
         setName(name);
         setPrice(price);
         setStockQuantity(stockQuantity);
@@ -18,6 +20,7 @@ public class Product {
         this.stockQuantity = 0;
     }
 
+    // GETTERS
     public int getProductId() {
         return productId;
     }
@@ -34,81 +37,66 @@ public class Product {
         return stockQuantity;
     }
 
+    // SETTERS with EXCEPTIONS (Week 6 requirement)
     public void setProductId(int productId) {
-        if (productId > 0) {
-            this.productId = productId;
-        } else {
-            System.out.println("⚠️ Warning: Product ID must be positive! Setting to 0");
-            this.productId = 0;
+        if (productId <= 0) {
+            throw new IllegalArgumentException("Product ID must be positive, got: " + productId);
         }
+        this.productId = productId;
     }
 
     public void setName(String name) {
-        if (name != null && !name.trim().isEmpty()) {
-            this.name = name;
-        } else {
-            System.out.println("⚠️ Warning: Name cannot be empty! Setting to 'Unknown Product'.");
-            this.name = "Unknown Product";
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Product name cannot be empty");
         }
+        this.name = name;
     }
 
     public void setPrice(double price) {
-        if (price >= 0) {
-            this.price = price;
-        } else {
-            System.out.println("⚠️ Warning: Price cannot be negative! Setting to 0.");
-            this.price = 0.0;
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative, got: " + price);
         }
+        this.price = price;
     }
 
     public void setStockQuantity(int stockQuantity) {
-        if (stockQuantity >= 0) {
-            this.stockQuantity = stockQuantity;
-        } else {
-            System.out.println("⚠️ Warning: Stock quantity cannot be negative! Setting to 0.");
-            this.stockQuantity = 0;
+        if (stockQuantity < 0) {
+            throw new IllegalArgumentException("Stock quantity cannot be negative, got: " + stockQuantity);
         }
+        this.stockQuantity = stockQuantity;
     }
 
-
+    // CONCRETE METHODS (shared by all products)
     public boolean isInStock() {
         return stockQuantity > 0;
     }
 
-    public String getProductType() {
-        return "General Product";
-    }
-
     public void restock(int quantity) {
-        if (quantity > 0) {
-            this.stockQuantity += quantity;
-            System.out.println("✅ Restocked " + quantity + " units of " + name);
-        } else {
-            System.out.println("❌ Restock quantity must be positive!");
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Restock quantity must be positive");
         }
+        this.stockQuantity += quantity;
+        System.out.println("✅ Restocked " + quantity + " units of " + name);
     }
 
     public boolean sell(int quantity) {
         if (quantity <= 0) {
-            System.out.println("❌ Sell quantity must be positive!");
-            return false;
+            throw new IllegalArgumentException("Sell quantity must be positive");
         }
         if (stockQuantity >= quantity) {
             this.stockQuantity -= quantity;
             return true;
         } else {
-            System.out.println("❌ Insufficient stock! Available: " + stockQuantity);
-            return false;
+            throw new IllegalArgumentException("Insufficient stock! Available: " + stockQuantity + ", requested: " + quantity);
         }
     }
 
     public void applyDiscount(double percentage) {
-        if (percentage > 0 && percentage <= 100) {
-            this.price = this.price * (1 - percentage / 100);
-            System.out.println("✅ Discount applied successfully!");
-        } else {
-            System.out.println("❌ Invalid discount percentage! Must be between 0 and 100.");
+        if (percentage <= 0 || percentage > 100) {
+            throw new IllegalArgumentException("Discount percentage must be between 0 and 100, got: " + percentage);
         }
+        this.price = this.price * (1 - percentage / 100);
+        System.out.println("✅ Discount applied successfully!");
     }
 
     public String getFormattedPrice() {
@@ -118,6 +106,13 @@ public class Product {
     public boolean isExpensive() {
         return price > 5000;
     }
+
+    // ABSTRACT METHODS - must be implemented by child classes
+
+    public abstract String getProductType();
+
+
+    public abstract void displayProductDetails();
 
     @Override
     public String toString() {
