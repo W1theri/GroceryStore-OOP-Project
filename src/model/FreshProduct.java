@@ -1,22 +1,29 @@
 package model;
 
+import exception.InvalidProductException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 
 public class FreshProduct extends Product implements Perishable {
     private String expiryDate;
     private boolean isOrganic;
 
+
     public FreshProduct(int productId, String name, double price, int stockQuantity,
-                        String expiryDate, boolean isOrganic) {
+                        String expiryDate, boolean isOrganic) throws InvalidProductException {
         super(productId, name, price, stockQuantity);
         setExpiryDate(expiryDate);
         this.isOrganic = isOrganic;
     }
+
 
     public FreshProduct() {
         super();
         this.expiryDate = "Not set";
         this.isOrganic = false;
     }
+
 
     @Override
     public String getExpiryDate() {
@@ -27,9 +34,10 @@ public class FreshProduct extends Product implements Perishable {
         return isOrganic;
     }
 
-    public void setExpiryDate(String expiryDate) {
+
+    public void setExpiryDate(String expiryDate) throws InvalidProductException {
         if (expiryDate == null || expiryDate.trim().isEmpty()) {
-            throw new IllegalArgumentException("Expiry date cannot be empty");
+            throw new InvalidProductException("Expiry date cannot be empty");
         }
         this.expiryDate = expiryDate;
     }
@@ -38,15 +46,19 @@ public class FreshProduct extends Product implements Perishable {
         isOrganic = organic;
     }
 
+
+
     @Override
     public boolean isInStock() {
         return getStockQuantity() > 0 && !isExpired();
     }
 
+
     @Override
     public String getProductType() {
         return "Fresh Product";
     }
+
 
     @Override
     public void displayProductDetails() {
@@ -59,28 +71,52 @@ public class FreshProduct extends Product implements Perishable {
         System.out.println("   Price: " + getFormattedPrice());
     }
 
-    // PERISHABLE INTERFACE METHODS
+    // ==================== PERISHABLE INTERFACE METHODS ====================
+
+
     @Override
     public boolean isExpired() {
-        return expiryDate.equals("Expired");
+        if (expiryDate.equals("Expired")) {
+            return true;
+        }
+        try {
+            LocalDate today = LocalDate.now();
+            LocalDate expiry = LocalDate.parse(expiryDate);
+            return today.isAfter(expiry);
+        } catch (Exception e) {
+            return false;
+        }
     }
+
 
     @Override
     public void markAsExpired() {
         this.expiryDate = "Expired";
-        setStockQuantity(0);
+        try {
+            setStockQuantity(0);
+        } catch (InvalidProductException e) {
+        }
         System.out.println("⚠️ Product " + getName() + " has been marked as expired!");
     }
+
 
     @Override
     public int getDaysUntilExpiry() {
         if (isExpired()) {
             return 0;
         }
-        return 7;
+        try {
+            LocalDate today = LocalDate.now();
+            LocalDate expiry = LocalDate.parse(expiryDate);
+            long days = ChronoUnit.DAYS.between(today, expiry);
+            return (int) days;
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
-    // ADDITIONAL METHODS
+
+
     public void displayFreshnessInfo() {
         displayProductDetails();
     }

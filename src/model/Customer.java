@@ -1,10 +1,12 @@
 package model;
 
+
 public class Customer {
     private int customerId;
     private String name;
     private String membershipLevel;
     private double totalPurchases;
+
 
     public Customer(int customerId, String name, String membershipLevel, double totalPurchases) {
         setCustomerId(customerId);
@@ -13,12 +15,14 @@ public class Customer {
         setTotalPurchases(totalPurchases);
     }
 
+
     public Customer() {
         this.customerId = 0;
         this.name = "Unknown Customer";
         this.membershipLevel = "Standard";
         this.totalPurchases = 0.0;
     }
+
 
     public int getCustomerId() {
         return customerId;
@@ -43,6 +47,7 @@ public class Customer {
         this.customerId = customerId;
     }
 
+
     public void setName(String name) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Customer name cannot be empty");
@@ -50,12 +55,14 @@ public class Customer {
         this.name = name;
     }
 
+
     public void setMembershipLevel(String membershipLevel) {
         if (membershipLevel == null || membershipLevel.trim().isEmpty()) {
             throw new IllegalArgumentException("Membership level cannot be empty");
         }
         this.membershipLevel = membershipLevel;
     }
+
 
     public void setTotalPurchases(double totalPurchases) {
         if (totalPurchases < 0) {
@@ -65,10 +72,11 @@ public class Customer {
         updateMembershipLevel();
     }
 
-    // ADDITIONAL METHODS
+
     public boolean isVIP() {
         return totalPurchases > 50000;
     }
+
 
     public void addPurchase(double amount) {
         if (amount <= 0) {
@@ -78,6 +86,7 @@ public class Customer {
         updateMembershipLevel();
         System.out.println("✅ Added " + String.format("%.2f", amount) + " KZT to " + name);
     }
+
 
     private void updateMembershipLevel() {
         String oldLevel = this.membershipLevel;
@@ -96,6 +105,7 @@ public class Customer {
         }
     }
 
+
     public double getDiscountPercentage() {
         switch (membershipLevel) {
             case "Platinum":
@@ -108,6 +118,7 @@ public class Customer {
                 return 0.0;
         }
     }
+
 
     public String getFormattedPurchases() {
         return String.format("%.2f KZT", totalPurchases);

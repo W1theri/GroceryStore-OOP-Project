@@ -23,6 +23,7 @@ public class MenuManager implements Menu {
 
     private void loadTestData() {
         try {
+            // General Product (anonymous class since Product is abstract)
             products.add(new Product(101, "Rice", 1200.0, 200) {
                 @Override
                 public String getProductType() {
@@ -36,8 +37,9 @@ public class MenuManager implements Menu {
                     System.out.println("   Price: " + getFormattedPrice());
                 }
             });
-            products.add(new FreshProduct(102, "Apple", 500.0, 150, "2025-01-20", true));
-            products.add(new FreshProduct(103, "Tomato", 800.0, 100, "2025-01-18", false));
+
+            products.add(new FreshProduct(102, "Apple", 500.0, 150, "2025-02-15", true));
+            products.add(new FreshProduct(103, "Tomato", 800.0, 100, "2025-01-25", false));
             products.add(new PackagedProduct(104, "Chocolate", 450.0, 80, "Rakhat", 100));
             products.add(new PackagedProduct(105, "Flour", 2500.0, 50, "Kazakhstan", 2000));
 
@@ -45,17 +47,17 @@ public class MenuManager implements Menu {
             customers.add(new Customer(1002, "Aliya Kairat", "Gold", 65000.0));
 
             sales.add(new Sale(5001, "Aidar Nurbek", 3500.0, "2025-01-15"));
-        } catch (Exception e) {
+        } catch (InvalidProductException e) {
             System.out.println("⚠️ Error loading test data: " + e.getMessage());
         }
     }
 
     @Override
     public void displayMenu() {
-        System.out.println("\n╔═══════════════════════════════════════╗");
+        System.out.println("\n╔══════════════════════════════════════╗");
         System.out.println("║     GROCERY STORE SYSTEM              ║");
         System.out.println("║     With Interfaces & Exceptions      ║");
-        System.out.println("╚═══════════════════════════════════════╝");
+        System.out.println("╚══════════════════════════════════════╝");
         System.out.println("┌────────────────────────────────────────┐");
         System.out.println("│  PRODUCT MANAGEMENT                    │");
         System.out.println("│  1. 📦 Add General Product             │");
@@ -159,7 +161,7 @@ public class MenuManager implements Menu {
 
             System.out.println("\n✅ General product added successfully!");
             System.out.println(product);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidProductException e) {
             System.out.println("\n❌ Failed to add product: " + e.getMessage());
         } catch (InputMismatchException e) {
             System.out.println("\n❌ Invalid input format!");
@@ -197,7 +199,7 @@ public class MenuManager implements Menu {
 
             System.out.println("\n✅ Fresh product added successfully!");
             System.out.println(product);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidProductException e) {
             System.out.println("\n❌ Failed to add product: " + e.getMessage());
         } catch (InputMismatchException e) {
             System.out.println("\n❌ Invalid input format!");
@@ -235,7 +237,7 @@ public class MenuManager implements Menu {
 
             System.out.println("\n✅ Packaged product added successfully!");
             System.out.println(product);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidProductException e) {
             System.out.println("\n❌ Failed to add product: " + e.getMessage());
         } catch (InputMismatchException e) {
             System.out.println("\n❌ Invalid input format!");
@@ -244,9 +246,9 @@ public class MenuManager implements Menu {
     }
 
     private void viewAllProducts() {
-        System.out.println("\n╔═══════════════════════════════════════╗");
+        System.out.println("\n╔══════════════════════════════════════╗");
         System.out.println("║     📋 ALL PRODUCTS (POLYMORPHIC)     ║");
-        System.out.println("╚═══════════════════════════════════════╝");
+        System.out.println("╚══════════════════════════════════════╝");
 
         if (products.isEmpty()) {
             System.out.println("❌ No products found.");
@@ -280,9 +282,9 @@ public class MenuManager implements Menu {
     }
 
     private void demonstratePolymorphism() {
-        System.out.println("\n╔═══════════════════════════════════════╗");
+        System.out.println("\n╔══════════════════════════════════════╗");
         System.out.println("║   ✨ POLYMORPHISM DEMONSTRATION ✨    ║");
-        System.out.println("╚═══════════════════════════════════════╝");
+        System.out.println("╚══════════════════════════════════════╝");
         System.out.println("\nCalling displayProductDetails() on all products:");
         System.out.println("(Same method name, different behavior!)\n");
         System.out.println("─────────────────────────────────────────");
@@ -299,9 +301,9 @@ public class MenuManager implements Menu {
     }
 
     private void viewFreshProductsOnly() {
-        System.out.println("\n╔═══════════════════════════════════════╗");
+        System.out.println("\n╔══════════════════════════════════════╗");
         System.out.println("║       🍎 FRESH PRODUCTS ONLY 🍎       ║");
-        System.out.println("╚═══════════════════════════════════════╝");
+        System.out.println("╚══════════════════════════════════════╝");
 
         int count = 0;
         for (Product p : products) {
@@ -321,9 +323,9 @@ public class MenuManager implements Menu {
     }
 
     private void viewPackagedProductsOnly() {
-        System.out.println("\n╔═══════════════════════════════════════╗");
+        System.out.println("\n╔══════════════════════════════════════╗");
         System.out.println("║     📦 PACKAGED PRODUCTS ONLY 📦      ║");
-        System.out.println("╚═══════════════════════════════════════╝");
+        System.out.println("╚══════════════════════════════════════╝");
 
         int count = 0;
         for (Product p : products) {

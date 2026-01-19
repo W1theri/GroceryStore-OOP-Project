@@ -1,6 +1,5 @@
 package model;
 
-
 public interface Perishable {
 
     boolean isExpired();

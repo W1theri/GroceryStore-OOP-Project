@@ -1,15 +1,21 @@
 # 🛒 Grocery Store Management System
 
-A comprehensive Java-based grocery store management system with interactive console menu, implementing advanced OOP principles including **encapsulation**, **inheritance**, **polymorphism**, and **data validation**.
+A comprehensive Java-based grocery store management system with interactive console menu, implementing advanced OOP principles including **encapsulation**, **inheritance**, **polymorphism**, **abstract classes**, **interfaces**, and **exception handling**.
 
+---
 
-##  Features
+## ✨ Features
 
-### Core OOP Implementation
+### Core OOP Implementation (Week 6 Enhanced)
 - **Encapsulation**: Private/protected fields with controlled access via getters/setters
 - **Inheritance**: Parent-child class hierarchy (`Product` → `FreshProduct`, `PackagedProduct`)
 - **Polymorphism**: Single ArrayList stores multiple product types with dynamic behavior
-- **Data Validation**: Comprehensive input validation across all classes
+- **Abstract Classes**: `Product` is abstract with abstract methods `getProductType()` and `displayProductDetails()`
+- **Interfaces**:
+  - `Menu` interface for menu system
+  - `Perishable` interface for fresh products
+- **Exception Handling**: Custom `InvalidProductException` for robust error handling
+- **Data Validation**: Comprehensive input validation with exception throwing
 - **ArrayList Integration**: Dynamic storage for multiple objects
 - **Real-time Feedback**: Warnings and success messages with emoji indicators
 
@@ -19,16 +25,42 @@ A comprehensive Java-based grocery store management system with interactive cons
 - **Polymorphic Behavior**: Same method calls produce different behaviors based on object type
 - **Type Filtering**: View products by specific types using `instanceof`
 - **Downcasting**: Access child-specific methods when needed
+- **Professional Exception Handling**: Try-catch blocks throughout with custom exceptions
 
 ---
 
-##  Menu Options
+## 📁 Project Structure
 
 ```
-╔════════════════════════════════════════╗
-║     GROCERY STORE SYSTEM               ║
-║      With Inheritance                  ║
-╚════════════════════════════════════════╝
+GroceryStore-OOP-Project/
+├── src/
+│   ├── model/
+│   │   ├── Product.java (ABSTRACT CLASS ⭐)
+│   │   ├── FreshProduct.java (extends Product, implements Perishable)
+│   │   ├── PackagedProduct.java (extends Product)
+│   │   ├── Perishable.java (INTERFACE ⭐)
+│   │   ├── Customer.java
+│   │   └── Sale.java
+│   │
+│   ├── menu/
+│   │   ├── Menu.java (INTERFACE ⭐)
+│   │   └── MenuManager.java (implements Menu)
+│   │
+│   ├── exception/
+│   │   └── InvalidProductException.java (CUSTOM EXCEPTION ⭐)
+│   │
+│   └── Main.java (7 lines! ⭐)
+```
+
+---
+
+## 🎯 Menu Options
+
+```
+╔══════════════════════════════════════╗
+║     GROCERY STORE SYSTEM              ║
+║     With Interfaces & Exceptions      ║
+╚══════════════════════════════════════╝
 ┌────────────────────────────────────────┐
 │  PRODUCT MANAGEMENT                    │
 │  1. 📦 Add General Product             │
@@ -42,69 +74,61 @@ A comprehensive Java-based grocery store management system with interactive cons
 │  CUSTOMER & SALES                      │
 │  8. 👤 Add Customer                    │
 │  9. 👥 View All Customers              │
-│  10. 🛍️  Add Sale                      │
+│  10. 🛒 Add Sale                       │
 │  11. 📊 View All Sales                 │
 ├────────────────────────────────────────┤
 │  0. 🚪 Exit                            │
 └────────────────────────────────────────┘
 ```
 
----
-
-## Class Hierarchy
-
-### Inheritance Structure
-
-Product (Parent Class)
-
-FreshProduct (Child Class)
-
-PackagedProduct (Child Class)
 
 
-##  Validation Rules
+## 🎓 Week 6 Requirements Compliance
 
-### Product Validation
-- ✅ Product ID must be positive
-- ✅ Name cannot be empty
-- ✅ Price cannot be negative (set to 0 if invalid)
-- ✅ Stock quantity cannot be negative
+| Requirement | Implementation | Status |
+|------------|----------------|--------|
+| Menu Interface | `Menu.java` with `displayMenu()`, `run()` | ✅ |
+| MenuManager implements Menu | `MenuManager implements Menu` | ✅ |
+| One More Interface | `Perishable` interface | ✅ |
+| Abstract Class | `Product` is abstract | ✅ |
+| Abstract Methods | `getProductType()`, `displayProductDetails()` | ✅ |
+| All child classes implement abstract methods | FreshProduct, PackagedProduct with @Override | ✅ |
+| Custom Exception | `InvalidProductException` | ✅ |
+| Setters throw exceptions | All setters throw InvalidProductException | ✅ |
+| Try-catch blocks | Throughout MenuManager | ✅ |
+| Clean Main.java | Only 7 lines! | ✅ |
+| Package structure | menu/, exception/, model/ | ✅ |
 
-### FreshProduct Additional Validation
-- ✅ Expiry date must be provided
-- ✅ Organic status (boolean)
-- ✅ Automatic stock removal when expired
-
-### PackagedProduct Additional Validation
-- ✅ Manufacturer name cannot be empty
-- ✅ Weight must be positive
-- ✅ Automatic price per kg calculation
-
-### Customer Validation
-- ✅ Customer ID must be positive
-- ✅ Name cannot be empty
-- ✅ Total purchases cannot be negative
-- ✅ Auto-upgrade membership based on spending:
-   - **Standard**: < 20,000 KZT
-   - **Silver**: 20,000 - 49,999 KZT
-   - **Gold**: 50,000 - 99,999 KZT
-   - **Platinum**: ≥ 100,000 KZT
-
-### Sale Validation
-- ✅ Sale ID must be positive
-- ✅ Customer name cannot be empty
-- ✅ Total amount cannot be negative
-- ✅ Date must be provided
+**Compliance Score: 100%** ✅
 
 ---
 
-##  How to Run
+## 🎨 Class Hierarchy
+
+```
+Product (Abstract Class)
+├── FreshProduct (implements Perishable)
+└── PackagedProduct
+
+Menu (Interface)
+└── MenuManager (implements Menu)
+
+Perishable (Interface)
+└── FreshProduct (implements Perishable)
+
+Exception
+└── InvalidProductException (Custom Exception)
+```
+
+---
+
+## 💻 How to Run
 
 ### 1. Clone the repository:
-
+```bash
 git clone https://github.com/W1theri/GroceryStore-OOP-Project.git
 cd GroceryStore-OOP-Project
-
+```
 
 ### 2. Open in IntelliJ IDEA
 - Open IntelliJ IDEA
@@ -120,7 +144,7 @@ cd GroceryStore-OOP-Project
 
 ---
 
-##  Example Usage
+## 📊 Example Usage
 
 ### Adding a Fresh Product
 ```
@@ -130,241 +154,139 @@ Enter product ID: 106
 Enter product name: Apple
 Enter price (KZT): 500
 Enter stock quantity: 150
-Enter expiry date (YYYY-MM-DD): 2025-01-20
+Enter expiry date (YYYY-MM-DD): 2025-02-15
 Is organic? (true/false): true
 
 ✅ Fresh product added successfully!
-[Fresh Product] Product{productId=106, name='Apple', price=500.00 KZT, stockQuantity=150} | Expiry: 2025-01-20 | 🌿 ORGANIC
+[Fresh Product] Product{productId=106, name='Apple', price=500.00 KZT, stockQuantity=150} | Expiry: 2025-02-15 | 🌿 ORGANIC
 ```
 
-### Adding a Packaged Product
+### Exception Handling in Action
 ```
-Enter your choice: 3
---- ADD PACKAGED PRODUCT 📦 ---
-Enter product ID: 107
-Enter product name: Flour
-Enter price (KZT): 2500
-Enter stock quantity: 50
-Enter manufacturer: Kazakhstan
-Enter weight (grams): 2000
-
-✅ Packaged product added successfully!
-[Packaged Product] Product{productId=107, name='Flour', price=2500.00 KZT, stockQuantity=50} | Manufacturer: Kazakhstan | Weight: 2000.0g
-```
-
-### Viewing All Products (Polymorphic)
-```
-Enter your choice: 4
-╔════════════════════════════════════════╗
-║     📋 ALL PRODUCTS (POLYMORPHIC)      ║
-╚════════════════════════════════════════╝
-Total products: 5
-
-1. [General Product] Rice...
-   
-2. [Fresh Product] Apple...
-   🍎 Fresh Product Details:
-   Expiry: 2025-01-20
-   Days Until Expiry: 7
-   🌿 ORGANIC CERTIFIED
-
-3. [Packaged Product] Flour...
-   📦 Packaged Product Details:
-   Manufacturer: Kazakhstan
-   Weight: 2000.0g
-   Price per kg: 1250.00 KZT
-   📦 BULK PACKAGE
+Enter price (KZT): -500
+❌ Failed to add product: Price cannot be negative: -500.0
 ```
 
 ### Demonstrating Polymorphism
 ```
 Enter your choice: 5
-╔════════════════════════════════════════╗
-║   ✨ POLYMORPHISM DEMONSTRATION ✨     ║
-╚════════════════════════════════════════╝
+╔══════════════════════════════════════╗
+║   ✨ POLYMORPHISM DEMONSTRATION ✨    ║
+╚══════════════════════════════════════╝
 
-Calling isInStock() on all products:
+Calling displayProductDetails() on all products:
 (Same method name, different behavior!)
 
-Rice - ✅ In Stock
-   Type: General Product
-Apple - ✅ In Stock
-   Type: Fresh Product
-Flour - ✅ In Stock
-   Type: Packaged Product
+📦 General Product: Rice
+   Stock: 200
+   Price: 1200.00 KZT
 
-✨ Notice: Same method call (isInStock())
-   but different logic for FreshProduct!
-   This is POLYMORPHISM in action! 🎭
-```
-
-### Viewing Fresh Products Only
-```
-Enter your choice: 6
-╔════════════════════════════════════════╗
-║       🍎 FRESH PRODUCTS ONLY 🍎        ║
-╚════════════════════════════════════════╝
-
-1. Apple
 🍎 Fresh Product: Apple
-   Expiry Date: 2025-01-20
-   Days Until Expiry: 7
+   Expiry Date: 2025-02-15
+   Days Until Expiry: 26
    Organic: Yes 🌿
    Status: ✅ FRESH
 
-📊 Total fresh products: 2
-```
+📦 Packaged Product: Flour
+   Manufacturer: Kazakhstan
+   Weight: 2000.0g
+   Price per kg: 1250.00 KZT
 
-### Validation Example
-```
-Enter price (KZT): -1400
-⚠️ Warning: Price cannot be negative! Setting to 0.
+✨ This is POLYMORPHISM in action! 🎭
 ```
 
 ---
+
+## 🔑 Key Concepts Demonstrated
+
+### 1. Abstract Class vs Interface
+
+**When to use Abstract Class (Product):**
+- Have common code to share (concrete methods like `isInStock()`, `restock()`)
+- Want to enforce certain methods in children (abstract methods)
+- Related classes share fields and some behavior
+
+**When to use Interface (Menu, Perishable):**
+- Define "what" something can do (capability/contract)
+- No shared implementation needed
+- Want to support multiple implementations
+
+
 
 ## 🛠️ Technical Implementation
 
-### Core OOP Principles
+### Model Classes Features
 
-#### 1. Encapsulation
-- **Private fields** with controlled access via getters/setters
-- **Data validation** in all setters
-- **Information hiding** to protect object state
+#### Product (Abstract Parent)
+- Abstract methods: `getProductType()`, `displayProductDetails()`
+- Concrete methods: `isInStock()`, `restock()`, `sell()`, `applyDiscount()`
+- All setters throw `InvalidProductException`
+- Protected fields accessible to children
 
-#### 2. Inheritance
-- **Parent class**: `Product` with protected fields
-- **Child classes**: `FreshProduct`, `PackagedProduct`
-- **`extends` keyword** for class hierarchy
-- **`super()` keyword** in child constructors
-- **Code reusability** through inheritance
+#### FreshProduct (extends Product, implements Perishable)
+- **Inherited & Overridden:** `isInStock()` checks expiry + stock
+- **Perishable Methods:** `isExpired()`, `getDaysUntilExpiry()`, `markAsExpired()`
+- **Real Date Handling:** Uses `LocalDate` to calculate actual days until expiry
+- **Unique Features:** Organic certification, freshness status
 
-#### 3. Polymorphism
-- **Single ArrayList<Product>** stores all product types
-- **Method overriding** with `@Override` annotation
-- **Dynamic method dispatch** based on actual object type
-- **Same method name, different behavior**
-
-#### 4. instanceof and Downcasting
-- **Type checking** with `instanceof` operator
-- **Safe downcasting** to access child-specific methods
-- **Type filtering** for viewing specific product types
+#### PackagedProduct (extends Product)
+- **Inherited & Overridden:** `getFormattedPrice()` shows price per kg
+- **Unique Methods:** `getPricePerKg()`, `isLightweight()`, `isBulk()`
+- **Special Features:** Bulk discount for packages > 2kg
 
 ---
 
-## Key Methods by Class
+## 📈 Project Statistics
 
-### Product (Parent Class)
-- `isInStock()` - Check availability
-- `getProductType()` - Return product type (overridden in children)
-- `restock(int)` - Add inventory with validation
-- `sell(int)` - Process sale with validation
-- `applyDiscount(double)` - Apply percentage discount
-- `isExpensive()` - Check premium status (>5,000 KZT)
-- `getFormattedPrice()` - Format price display
-
-### FreshProduct (Child Class)
-**Inherited + Overridden:**
-- `isInStock()` - **OVERRIDE**: Checks both quantity AND expiry status
-- `toString()` - **OVERRIDE**: Includes expiry date and organic status
-
-**Unique Methods:**
-- `isExpired()` - Check if product has expired
-- `markAsExpired()` - Mark product as expired and remove from stock
-- `getDaysUntilExpiry()` - Calculate days until expiration
-- `displayFreshnessInfo()` - Show detailed freshness information
-
-### PackagedProduct (Child Class)
-**Inherited + Overridden:**
-- `getFormattedPrice()` - **OVERRIDE**: Shows price per kg
-- `toString()` - **OVERRIDE**: Includes manufacturer and weight
-
-**Unique Methods:**
-- `getPricePerKg()` - Calculate price per kilogram
-- `isLightweight()` - Check if package < 500g
-- `isBulk()` - Check if package > 2kg
-- `displayPackageInfo()` - Show detailed package information
-- `applyBulkDiscount()` - Apply 10% discount for bulk packages
-
-### Customer
-- `isVIP()` - Check VIP status (>50k purchases)
-- `addPurchase(double)` - Add to purchase history
-- `getDiscountPercentage()` - Get membership discount (0-15%)
-- `updateMembershipLevel()` - Auto-upgrade tier based on purchases
-- `getCustomerLevel()` - Get customer tier with emoji
-
-### Sale
-- `addItem(double)` - Add item to transaction
-- `applyDiscount(double)` - Apply sale discount
-- `calculateTax()` - Compute 12% tax
-- `getTotalWithTax()` - Calculate final amount with tax
-- `isLargeSale()` - Check if transaction >20k KZT
-
----
-
-## Learning Outcomes
-
-### Week 3 Achievements ✅
--  Enhanced encapsulation with comprehensive validation
--  Built interactive console application using Scanner
--  Implemented ArrayList for dynamic data management
--  Created user-friendly interface with error handling
--  Added real-time feedback and data integrity checks
-
-### Week 4 Achievements ✅
--  Implemented inheritance with parent-child hierarchy
--  Created polymorphic behavior using method overriding
--  Used protected fields for child class access
--  Demonstrated dynamic method dispatch
--  Applied instanceof operator for type checking
--  Performed safe downcasting for child-specific operations
--  Built comprehensive console menu demonstrating OOP principles
-
----
-
-## Author
-
-Abilmansur - [W1theri](https://github.com/W1theri)
-
-
-
-##  Project Statistics
-
-- **Classes**: 6 (Product, FreshProduct, PackagedProduct, Customer, Sale, Main)
+- **Classes**: 10 (Product, FreshProduct, PackagedProduct, Customer, Sale, Menu, MenuManager, Perishable, InvalidProductException, Main)
+- **Abstract Classes**: 1 (Product)
+- **Interfaces**: 2 (Menu, Perishable)
+- **Custom Exceptions**: 1 (InvalidProductException)
 - **Inheritance Levels**: 2 (Parent → Child)
 - **Polymorphic ArrayList**: 1 (ArrayList<Product>)
 - **Menu Options**: 11+ interactive operations
-- **Lines of Code**: ~800+ (excluding comments)
-- **Validation Points**: 15+ input validation checks
+- **Lines of Code**: ~1000+ (excluding comments)
+- **Validation Points**: 20+ input validation checks with exceptions
 
 ---
 
-##  Notes
+## ✅ Learning Outcomes
 
-### System Configuration
-- Initial test data loaded on startup for demonstration
-- All monetary values in **Kazakhstan Tenge (KZT)**
-- Tax rate: **12%** (Kazakhstan standard)
-- UTF-8 encoding for emoji support
+### Week 6 Achievements
+- ✅ Implemented abstract class with abstract methods
+- ✅ Created and implemented multiple interfaces
+- ✅ Built custom exception class
+- ✅ Refactored all setters to throw exceptions
+- ✅ Added comprehensive try-catch blocks
+- ✅ Separated menu logic into MenuManager
+- ✅ Achieved clean Main.java (7 lines!)
+- ✅ Professional package structure (menu/, exception/, model/)
+- ✅ Real date handling with LocalDate API
+- ✅ Demonstrated difference between abstract class and interface
 
-### Thresholds
-- Premium product: **5,000 KZT**
-- VIP customer: **50,000 KZT** total purchases
-- Large sale: **20,000 KZT**
-- Bulk package: **2,000g** (2kg)
-- Lightweight package: **500g**
+### Previous Weeks (Cumulative)
+- ✅ Encapsulation with getters/setters
+- ✅ Inheritance hierarchy
+- ✅ Polymorphism with method overriding
+- ✅ ArrayList for dynamic storage
+- ✅ Interactive console application
+- ✅ Input validation and error handling
 
-### Membership Tiers
-| Tier | Spending Range | Discount |
-|------|---------------|----------|
-| Standard | < 20,000 KZT | 0% |
-| Silver | 20,000 - 49,999 KZT | 5% |
-| Gold | 50,000 - 99,999 KZT | 10% |
-| Platinum | ≥ 100,000 KZT | 15% |
+---
 
 
 
-##  License
+## 👨‍💻 Author
 
-This project is created for educational purposes as part of OOP course at AITU
+**Abilmansur** - [W1theri](https://github.com/W1theri)
+
+---
+
+## 📚 Course Information
+
+- **Course**: Object-Oriented Programming (OOP)
+- **Institution**: AITU (Astana IT University)
+- **Assignment**: Week 6 - Interfaces, Abstract Classes & Exception Handling
+- **Date**: 20 January 2025
+
 

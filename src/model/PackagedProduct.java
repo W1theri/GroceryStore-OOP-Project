@@ -1,22 +1,27 @@
 package model;
 
+import exception.InvalidProductException;
+
 
 public class PackagedProduct extends Product {
     private String manufacturer;
-    private double weight;
+    private double weight; // in grams
+
 
     public PackagedProduct(int productId, String name, double price, int stockQuantity,
-                           String manufacturer, double weight) {
+                           String manufacturer, double weight) throws InvalidProductException {
         super(productId, name, price, stockQuantity);
         setManufacturer(manufacturer);
         setWeight(weight);
     }
+
 
     public PackagedProduct() {
         super();
         this.manufacturer = "Unknown";
         this.weight = 0.0;
     }
+
 
     public String getManufacturer() {
         return manufacturer;
@@ -26,24 +31,28 @@ public class PackagedProduct extends Product {
         return weight;
     }
 
-    public void setManufacturer(String manufacturer) {
+
+    public void setManufacturer(String manufacturer) throws InvalidProductException {
         if (manufacturer == null || manufacturer.trim().isEmpty()) {
-            throw new IllegalArgumentException("Manufacturer name cannot be empty");
+            throw new InvalidProductException("Manufacturer name cannot be empty");
         }
         this.manufacturer = manufacturer;
     }
 
-    public void setWeight(double weight) {
+
+    public void setWeight(double weight) throws InvalidProductException {
         if (weight <= 0) {
-            throw new IllegalArgumentException("Weight must be positive, got: " + weight);
+            throw new InvalidProductException("Weight must be positive, got: " + weight);
         }
         this.weight = weight;
     }
+
 
     @Override
     public String getProductType() {
         return "Packaged Product";
     }
+
 
     @Override
     public void displayProductDetails() {
@@ -61,20 +70,24 @@ public class PackagedProduct extends Product {
         }
     }
 
+
     @Override
     public String getFormattedPrice() {
         double pricePerKg = (getPrice() / weight) * 1000;
         return String.format("%.2f KZT (%.2f KZT/kg)", getPrice(), pricePerKg);
     }
 
-    // ADDITIONAL METHODS
+
+
     public boolean isLightweight() {
         return weight < 500;
     }
 
+
     public boolean isBulk() {
         return weight > 2000;
     }
+
 
     public double getPricePerKg() {
         if (weight > 0) {
@@ -83,17 +96,19 @@ public class PackagedProduct extends Product {
         return 0.0;
     }
 
+
     public void displayPackageInfo() {
         displayProductDetails();
     }
 
-    public void applyBulkDiscount() {
+
+    public void applyBulkDiscount() throws InvalidProductException {
         if (isBulk()) {
             double discount = 10.0;
             applyDiscount(discount);
             System.out.println("✅ Applied 10% bulk discount!");
         } else {
-            throw new IllegalArgumentException("Bulk discount only applies to packages over 2kg!");
+            throw new InvalidProductException("Bulk discount only applies to packages over 2kg!");
         }
     }
 

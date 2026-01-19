@@ -6,6 +6,7 @@ public class Sale {
     private double totalAmount;
     private String date;
 
+
     public Sale(int saleId, String customerName, double totalAmount, String date) {
         setSaleId(saleId);
         setCustomerName(customerName);
@@ -13,12 +14,14 @@ public class Sale {
         setDate(date);
     }
 
+
     public Sale() {
         this.saleId = 0;
         this.customerName = "Unknown";
         this.totalAmount = 0.0;
         this.date = "Not set";
     }
+
 
     public int getSaleId() {
         return saleId;
@@ -36,12 +39,14 @@ public class Sale {
         return date;
     }
 
+
     public void setSaleId(int saleId) {
         if (saleId <= 0) {
             throw new IllegalArgumentException("Sale ID must be positive, got: " + saleId);
         }
         this.saleId = saleId;
     }
+
 
     public void setCustomerName(String customerName) {
         if (customerName == null || customerName.trim().isEmpty()) {
@@ -50,12 +55,14 @@ public class Sale {
         this.customerName = customerName;
     }
 
+
     public void setTotalAmount(double totalAmount) {
         if (totalAmount < 0) {
             throw new IllegalArgumentException("Total amount cannot be negative, got: " + totalAmount);
         }
         this.totalAmount = totalAmount;
     }
+
 
     public void setDate(String date) {
         if (date == null || date.trim().isEmpty()) {
@@ -64,7 +71,8 @@ public class Sale {
         this.date = date;
     }
 
-    // ADDITIONAL METHODS
+
+
     public void addItem(double itemPrice) {
         if (itemPrice <= 0) {
             throw new IllegalArgumentException("Item price must be positive, got: " + itemPrice);
@@ -72,6 +80,7 @@ public class Sale {
         this.totalAmount += itemPrice;
         System.out.println("✅ Added item worth " + String.format("%.2f", itemPrice) + " KZT");
     }
+
 
     public void applyDiscount(double percentage) {
         if (percentage <= 0 || percentage > 100) {
@@ -83,21 +92,26 @@ public class Sale {
                 String.format("%.2f", discountAmount) + " KZT");
     }
 
+
     public double calculateTax() {
         return this.totalAmount * 0.12;
     }
+
 
     public double getTotalWithTax() {
         return this.totalAmount + calculateTax();
     }
 
+
     public boolean isLargeSale() {
         return totalAmount > 20000;
     }
 
+
     public String getFormattedTotal() {
         return String.format("%.2f KZT", totalAmount);
     }
+
 
     public String getFormattedTotalWithTax() {
         return String.format("%.2f KZT", getTotalWithTax());
