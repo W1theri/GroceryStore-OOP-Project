@@ -47,7 +47,6 @@ public class FreshProduct extends Product implements Perishable {
     }
 
 
-
     @Override
     public boolean isInStock() {
         return getStockQuantity() > 0 && !isExpired();
@@ -71,7 +70,6 @@ public class FreshProduct extends Product implements Perishable {
         System.out.println("   Price: " + getFormattedPrice());
     }
 
-    // ==================== PERISHABLE INTERFACE METHODS ====================
 
 
     @Override

@@ -301,9 +301,7 @@ public class MenuManager implements Menu {
     }
 
     private void viewFreshProductsOnly() {
-        System.out.println("\n╔══════════════════════════════════════╗");
-        System.out.println("║       🍎 FRESH PRODUCTS ONLY 🍎       ║");
-        System.out.println("╚══════════════════════════════════════╝");
+
 
         int count = 0;
         for (Product p : products) {
@@ -316,9 +314,9 @@ public class MenuManager implements Menu {
         }
 
         if (count == 0) {
-            System.out.println("❌ No fresh products found.");
+            System.out.println(" No fresh products found.");
         } else {
-            System.out.println("\n📊 Total fresh products: " + count);
+            System.out.println("\n Total fresh products: " + count);
         }
     }
 
@@ -345,7 +343,6 @@ public class MenuManager implements Menu {
     }
 
     private void addCustomer() {
-        System.out.println("\n--- ADD CUSTOMER ---");
         try {
             System.out.print("Enter customer ID: ");
             int id = getIntInput();
@@ -354,22 +351,22 @@ public class MenuManager implements Menu {
             System.out.print("Enter customer name: ");
             String name = scanner.nextLine();
 
-            System.out.print("Enter membership level (Standard/Silver/Gold/Platinum): ");
+            System.out.print("Enter membership level: ");
             String membership = scanner.nextLine();
 
-            System.out.print("Enter total purchases (KZT): ");
+            System.out.print("Enter total purchases : ");
             double purchases = getDoubleInput();
             scanner.nextLine();
 
             Customer customer = new Customer(id, name, membership, purchases);
             customers.add(customer);
 
-            System.out.println("\n✅ Customer added successfully!");
+            System.out.println("\n Customer added successfully!");
             System.out.println(customer);
         } catch (IllegalArgumentException e) {
-            System.out.println("\n❌ Failed to add customer: " + e.getMessage());
+            System.out.println("\n Failed to add customer: " + e.getMessage());
         } catch (InputMismatchException e) {
-            System.out.println("\n❌ Invalid input format!");
+            System.out.println("\n Invalid input format!");
             scanner.nextLine();
         }
     }

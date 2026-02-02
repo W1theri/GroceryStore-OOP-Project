@@ -41,16 +41,14 @@ public abstract class Product {
         return stockQuantity;
     }
 
-    // ==================== SETTERS (with CUSTOM EXCEPTION) ====================
 
 
     public void setProductId(int productId) throws InvalidProductException {
-        if (productId <= 0) {
-            throw new InvalidProductException("Product ID must be positive, got: " + productId);
+        if (productId < 0) {
+            throw new InvalidProductException("Product ID cannot be negative, got: " + productId);
         }
         this.productId = productId;
     }
-
 
     public void setName(String name) throws InvalidProductException {
         if (name == null || name.trim().isEmpty()) {
@@ -75,7 +73,6 @@ public abstract class Product {
         this.stockQuantity = stockQuantity;
     }
 
-    // ==================== CONCRETE METHODS (shared by all products) ====================
 
 
     public boolean isInStock() {

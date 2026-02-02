@@ -41,8 +41,8 @@ public class Customer {
     }
 
     public void setCustomerId(int customerId) {
-        if (customerId <= 0) {
-            throw new IllegalArgumentException("Customer ID must be positive, got: " + customerId);
+        if (customerId < 0) {
+            throw new IllegalArgumentException("Customer ID cannot be negative, got: " + customerId);
         }
         this.customerId = customerId;
     }
