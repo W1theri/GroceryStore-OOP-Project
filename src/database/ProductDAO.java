@@ -12,9 +12,6 @@ import java.util.List;
 
 public class ProductDAO {
 
-    // ========================================
-    // CREATE - Insert Product
-    // ========================================
 
     public int insertFreshProduct(FreshProduct freshProduct) {
         Connection connection = null;
@@ -154,9 +151,7 @@ public class ProductDAO {
         }
     }
 
-    // ========================================
-    // READ - Select Products
-    // ========================================
+
 
     public void displayAllProducts() {
         String sql = "SELECT * FROM product ORDER BY product_id";
@@ -387,9 +382,7 @@ public class ProductDAO {
         return null;
     }
 
-    // ========================================
-    // UPDATE - Week 8
-    // ========================================
+
 
     public boolean updateFreshProduct(FreshProduct product) {
         Connection connection = null;
@@ -519,9 +512,7 @@ public class ProductDAO {
         }
     }
 
-    // ========================================
-    // DELETE - Week 8
-    // ========================================
+
 
     public boolean deleteProduct(int productId) {
         String sql = "DELETE FROM product WHERE product_id = ?";
@@ -553,9 +544,7 @@ public class ProductDAO {
         return false;
     }
 
-    // ========================================
-    // SEARCH - Week 8
-    // ========================================
+
 
     public List<Product> searchByName(String name) {
         List<Product> products = new ArrayList<>();

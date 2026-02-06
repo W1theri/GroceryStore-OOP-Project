@@ -50,7 +50,7 @@ public class TestUpdate {
             System.out.println();
 
             System.out.println("╔══════════════════════════════════════╗");
-            System.out.println("║    ALL UPDATES COMPLETED           ║");
+            System.out.println("║    ALL UPDATES COMPLETED             ║");
             System.out.println("╚══════════════════════════════════════╝");
 
             System.out.println("\nVerify in database:");
