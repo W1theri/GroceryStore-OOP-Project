@@ -56,12 +56,12 @@ public class ProductDAO {
             stmtFresh.close();
 
             connection.commit();
-            System.out.println("✅ Fresh product inserted successfully ID: " + productId);
+            System.out.println(" Fresh product inserted successfully ID: " + productId);
 
             return productId;
 
         } catch (SQLException e) {
-            System.out.println("❌ Insert fresh product failed");
+            System.out.println(" Insert fresh product failed");
             e.printStackTrace();
 
             if (connection != null) {
@@ -125,12 +125,12 @@ public class ProductDAO {
             stmtPackaged.close();
 
             connection.commit();
-            System.out.println("✅ Packaged product inserted successfully ID: " + productId);
+            System.out.println(" Packaged product inserted successfully ID: " + productId);
 
             return productId;
 
         } catch (SQLException e) {
-            System.out.println("❌ Insert packaged product failed");
+            System.out.println(" Insert packaged product failed");
             e.printStackTrace();
 
             if (connection != null) {
@@ -190,16 +190,16 @@ public class ProductDAO {
             }
 
             if (count == 0) {
-                System.out.println("❌ No products found in database");
+                System.out.println(" No products found in database");
             } else {
-                System.out.println("\n📊 Total products: " + count);
+                System.out.println("\n Total products: " + count);
             }
 
             resultSet.close();
             statement.close();
 
         } catch (SQLException e) {
-            System.out.println("❌ Select failed");
+            System.out.println(" Select failed");
             e.printStackTrace();
         } finally {
             DatabaseConnection.closeConnection(connection);
@@ -236,7 +236,7 @@ public class ProductDAO {
             statement.close();
 
         } catch (SQLException | InvalidProductException e) {
-            System.out.println("❌ Select fresh products failed");
+            System.out.println(" Select fresh products failed");
             e.printStackTrace();
         } finally {
             DatabaseConnection.closeConnection(connection);
@@ -275,7 +275,7 @@ public class ProductDAO {
             statement.close();
 
         } catch (SQLException | InvalidProductException e) {
-            System.out.println("❌ Select packaged products failed");
+            System.out.println(" Select packaged products failed");
             e.printStackTrace();
         } finally {
             DatabaseConnection.closeConnection(connection);
@@ -427,11 +427,11 @@ public class ProductDAO {
             stmtFresh.close();
 
             connection.commit();
-            System.out.println("✅ Fresh product updated: " + product.getName());
+            System.out.println(" Fresh product updated: " + product.getName());
             return true;
 
         } catch (SQLException e) {
-            System.out.println("❌ Update failed!");
+            System.out.println(" Update failed!");
             e.printStackTrace();
 
             if (connection != null) {
@@ -491,11 +491,11 @@ public class ProductDAO {
             stmtPackaged.close();
 
             connection.commit();
-            System.out.println("✅ Packaged product updated: " + product.getName());
+            System.out.println(" Packaged product updated: " + product.getName());
             return true;
 
         } catch (SQLException e) {
-            System.out.println("❌ Update failed!");
+            System.out.println(" Update failed!");
             e.printStackTrace();
 
             if (connection != null) {
@@ -537,14 +537,14 @@ public class ProductDAO {
             statement.close();
 
             if (rowsDeleted > 0) {
-                System.out.println("✅ Product deleted (ID: " + productId + ")");
+                System.out.println(" Product deleted (ID: " + productId + ")");
                 return true;
             } else {
-                System.out.println("⚠️ No product found with ID: " + productId);
+                System.out.println(" No product found with ID: " + productId);
             }
 
         } catch (SQLException e) {
-            System.out.println("❌ Delete failed!");
+            System.out.println(" Delete failed!");
             e.printStackTrace();
         } finally {
             DatabaseConnection.closeConnection(connection);
@@ -587,10 +587,10 @@ public class ProductDAO {
 
             resultSet.close();
             statement.close();
-            System.out.println("✅ Found " + products.size() + " product(s)");
+            System.out.println(" Found " + products.size() + " product(s)");
 
         } catch (SQLException e) {
-            System.out.println("❌ Search failed!");
+            System.out.println(" Search failed!");
             e.printStackTrace();
         } finally {
             DatabaseConnection.closeConnection(connection);
@@ -632,10 +632,10 @@ public class ProductDAO {
 
             resultSet.close();
             statement.close();
-            System.out.println("✅ Found " + products.size() + " product(s)");
+            System.out.println(" Found " + products.size() + " product(s)");
 
         } catch (SQLException e) {
-            System.out.println("❌ Search failed!");
+            System.out.println(" Search failed!");
             e.printStackTrace();
         } finally {
             DatabaseConnection.closeConnection(connection);
@@ -676,10 +676,10 @@ public class ProductDAO {
 
             resultSet.close();
             statement.close();
-            System.out.println("✅ Found " + products.size() + " product(s)");
+            System.out.println(" Found " + products.size() + " product(s)");
 
         } catch (SQLException e) {
-            System.out.println("❌ Search failed!");
+            System.out.println(" Search failed!");
             e.printStackTrace();
         } finally {
             DatabaseConnection.closeConnection(connection);

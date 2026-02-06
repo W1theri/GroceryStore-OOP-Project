@@ -12,13 +12,13 @@ public class TestSelect {
         ProductDAO productDAO = new ProductDAO();
         CustomerDAO customerDAO = new CustomerDAO();
 
-        System.out.println("=== Test 1: Get All Products ===");
+        System.out.println(" Test 1: Get All Products ");
         productDAO.displayAllProducts();
 
-        System.out.println("\n\n=== Test 2: Get Fresh Products Only ===");
+        System.out.println("\n\n Test 2: Get Fresh Products Only ");
         productDAO.getAllFreshProducts();
 
-        System.out.println("\n\n=== Test 3: Get All Customers ===");
+        System.out.println("\n\n Test 3: Get All Customers ");
         customerDAO.getAllCustomers();
 
         System.out.println("\n╔══════════════════════════════════════╗");

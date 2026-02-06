@@ -16,7 +16,7 @@ public class TestInsert {
         CustomerDAO customerDAO = new CustomerDAO();
 
         try {
-            System.out.println("--- Test 1: Insert Fresh Product ---");
+            System.out.println(" Test 1: Insert Fresh Product ");
             FreshProduct apple = new FreshProduct(
                     0,
                     "Green Apple",
@@ -30,7 +30,7 @@ public class TestInsert {
             System.out.println("Apple inserted with ID: " + appleId);
             System.out.println();
 
-            System.out.println("--- Test 2: Insert Packaged Product ---");
+            System.out.println(" Test 2: Insert Packaged Product ");
             PackagedProduct pasta = new PackagedProduct(
                     0,
                     "Pasta",
@@ -44,7 +44,7 @@ public class TestInsert {
             System.out.println("Pasta inserted with ID: " + pastaId);
             System.out.println();
 
-            System.out.println("--- Test 3: Insert Customer ---");
+            System.out.println(" Test 3: Insert Customer ");
             Customer customer = new Customer(
                     0,
                     "Nurlan Bekov",
@@ -57,7 +57,7 @@ public class TestInsert {
             System.out.println();
 
             System.out.println("╔══════════════════════════════════════╗");
-            System.out.println("║   ✅ ALL INSERTS COMPLETED           ║");
+            System.out.println("║      ALL INSERTS COMPLETED           ║");
             System.out.println("╚══════════════════════════════════════╝");
 
         } catch (InvalidProductException e) {

@@ -11,26 +11,26 @@ public class TestDelete {
 
         ProductDAO productDAO = new ProductDAO();
 
-        System.out.println("--- BEFORE DELETE ---");
+        System.out.println(" BEFORE DELETE ");
         productDAO.displayAllProducts();
 
-        System.out.println("\n\n--- Test: Delete Product ---");
+        System.out.println("\n\n Test: Delete Product ");
         System.out.println("⚠️  WARNING: This will delete a product from database!");
         System.out.println("Attempting to delete product with ID 1 (Rice)...");
 
         boolean deleted = productDAO.deleteProduct(1);
 
         if (deleted) {
-            System.out.println("✅ Delete test passed");
+            System.out.println(" Delete test passed");
         } else {
-            System.out.println("❌ Delete test failed");
+            System.out.println(" Delete test failed");
         }
 
-        System.out.println("\n\n--- AFTER DELETE ---");
+        System.out.println("\n\n AFTER DELETE ");
         productDAO.displayAllProducts();
 
         System.out.println("\n╔══════════════════════════════════════╗");
-        System.out.println("║   ✅ DELETE TEST COMPLETED           ║");
+        System.out.println("║      DELETE TEST COMPLETED           ║");
         System.out.println("╚══════════════════════════════════════╝");
 
         System.out.println("\n⚠️  Note: Product ID 1 should no longer appear");
