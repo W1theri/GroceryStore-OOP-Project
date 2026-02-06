@@ -26,9 +26,9 @@ public class TestUpdate {
             );
 
             if (productDAO.updateFreshProduct(updatedApple)) {
-                System.out.println("✅ Test 1 Passed");
+                System.out.println(" Test 1 Passed");
             } else {
-                System.out.println("❌ Test 1 Failed");
+                System.out.println(" Test 1 Failed");
             }
             System.out.println();
 
@@ -43,21 +43,23 @@ public class TestUpdate {
             );
 
             if (productDAO.updatePackagedProduct(updatedChocolate)) {
-                System.out.println("✅ Test 2 Passed");
+                System.out.println(" Test 2 Passed");
             } else {
-                System.out.println("❌ Test 2 Failed");
+                System.out.println(" Test 2 Failed");
             }
             System.out.println();
 
             System.out.println("╔══════════════════════════════════════╗");
-            System.out.println("║   ✅ ALL UPDATES COMPLETED           ║");
+            System.out.println("║    ALL UPDATES COMPLETED           ║");
             System.out.println("╚══════════════════════════════════════╝");
 
             System.out.println("\nVerify in database:");
             System.out.println("SELECT * FROM product WHERE product_id IN (2, 4);");
 
         } catch (InvalidProductException e) {
-            System.out.println("❌ Error: " + e.getMessage());
+            System.out.println(" Error: " + e.getMessage());
         }
     }
 }
+
+
